@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ItemAddToDoList"
+        android:icon="@drawable/addtodoicon"
+        android:title="Add To-Do" />
+
+    <item
+        android:id="@+id/ItemDisplayToDoList"
+        android:icon="@drawable/todolisticon"
+        android:title="List To-Do" />
+
+    <item
+        android:id="@+id/ItemLogout"
+        android:icon="@drawable/logouticon"
+        android:title="Exit" />
+
+
+</menu>

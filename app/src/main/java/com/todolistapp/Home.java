@@ -30,7 +30,6 @@ public class Home extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.FragmentContent, fragment)
                 .commit();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
