@@ -29,11 +29,11 @@ import com.todolistapp.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Login extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
-    public ImageView imageViewLogin;
+    public ImageView imageViewSignUp;
     public EditText editTextUserEmail,editTextUserPassword;
-    public TextView textViewRegister;
+    public TextView textViewLogin;
 
     public String UserEmail,UserPassword;
 
@@ -42,14 +42,12 @@ public class Login extends AppCompatActivity {
 
     Boolean EditTextControl;
 
-    public SharedPreferences UserInformationSP;
-
     public VolleyNetworkCall UrlAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -61,37 +59,37 @@ public class Login extends AppCompatActivity {
         editTextUserEmail = findViewById(R.id.editTextUserEmail);
         editTextUserPassword = findViewById(R.id.editTextUserPassword);
 
-        requestQueue = Volley.newRequestQueue(Login.this);
-        progressDialog = new ProgressDialog(Login.this);
+        requestQueue = Volley.newRequestQueue(Register.this);
+        progressDialog = new ProgressDialog(Register.this);
 
-        imageViewLogin = findViewById(R.id.imageViewLogin);
-        imageViewLogin.setOnClickListener(new View.OnClickListener() {
+        imageViewSignUp = findViewById(R.id.imageViewSignUp);
+        imageViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(!CheckNetwork())
                 {
-                    Toast.makeText(Login.this, "Don't Connect Newtwork", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this, "Don't Connect Newtwork", Toast.LENGTH_LONG).show();
                 }
 
                 else {
-                        CheckValue();
+                    CheckValue();
 
                     if (EditTextControl)
                         UserLogin();
                     else
-                        Toast.makeText(Login.this, "Please fill blank.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, "Please fill blank.", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
 
-        textViewRegister = findViewById(R.id.textViewRegister);
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
+        textViewLogin = findViewById(R.id.textViewLogin);
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent intent = new Intent(Login.this, Register.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -111,10 +109,10 @@ public class Login extends AppCompatActivity {
 
     public void UserLogin() {
 
-        progressDialog.setMessage("Login...");
+        progressDialog.setMessage("Register...");
         progressDialog.show();
 
-        String LoginURL = UrlAddress.getUserLoginUrl();
+        String LoginURL = UrlAddress.getUserRegisterUrl()+UserEmail;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, LoginURL,
                 new Response.Listener<String>() {
@@ -123,16 +121,15 @@ public class Login extends AppCompatActivity {
 
                         progressDialog.dismiss();
 
-                        if(ServerResponse.equalsIgnoreCase("\n\nSuccess")) {
+                        if(ServerResponse.equalsIgnoreCase("\n\nThis Email Already Taken."))
+                        {
 
-                            SaveUserInformation();
-                            finish();
-                            Intent intent = new Intent(Login.this, Home.class);
-                            intent.putExtra("UserEmail", UserEmail);
-                            startActivity(intent);
                         }
-                        else {
-                            Toast.makeText(Login.this, ServerResponse, Toast.LENGTH_LONG).show();
+                        else
+                        {
+                            finish();
+                            Intent intent = new Intent(Register.this, Login.class);
+                            startActivity(intent);
                         }
                     }
                 },
@@ -140,7 +137,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Toast.makeText(Login.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -154,17 +151,8 @@ public class Login extends AppCompatActivity {
 
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(Register.this);
         requestQueue.add(stringRequest);
-    }
-
-    public void SaveUserInformation() {
-
-        UserInformationSP = getSharedPreferences("UserInformationSP", MODE_PRIVATE);
-        SharedPreferences.Editor UserInformationSPEdit = UserInformationSP.edit();
-        UserInformationSPEdit.putString("UserEmail", UserEmail);
-
-        UserInformationSPEdit.commit();
     }
 
     protected boolean CheckNetwork() {
@@ -185,4 +173,5 @@ public class Login extends AppCompatActivity {
 
     }
 }
+
 
