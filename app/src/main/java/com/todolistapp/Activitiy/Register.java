@@ -121,7 +121,7 @@ public class Register extends AppCompatActivity {
 
                         progressDialog.dismiss();
 
-                        if(ServerResponse.equalsIgnoreCase("\n\nThis Email Already Taken."))
+                        if(ServerResponse.equalsIgnoreCase("\n\nEmail already taken"))
                         {
 
                         }
