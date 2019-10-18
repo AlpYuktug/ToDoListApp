@@ -1,5 +1,6 @@
 package com.todolistapp.Fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -28,6 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class FragmentToDoList extends Fragment {
 
     public FragmentToDoList() {
@@ -45,6 +48,8 @@ public class FragmentToDoList extends Fragment {
 
     public VolleyNetworkCall UrlAddress;
 
+    public SharedPreferences UserInformationSP;
+    public String UserEmail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,9 @@ public class FragmentToDoList extends Fragment {
 
         mQueue = Volley.newRequestQueue(getActivity());
 
+        UserInformationSP = getContext().getSharedPreferences("UserInformationSP",MODE_PRIVATE);
+        UserEmail = UserInformationSP.getString("UserEmail", "");
+
         ToDoListJSONParse();
 
         return view;
@@ -90,10 +98,16 @@ public class FragmentToDoList extends Fragment {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject todo = jsonArray.getJSONObject(i);
 
-                                ToDoListTopic = todo.getString("ToDoListTopic");
-                                ToDoListNumber = todo.getInt("ToDoListNumber");
+                                String ToDoListOwner = todo.getString("ToDoListOwner");
 
-                                ModelToDoLists.add(new ModelToDoList(ToDoListNumber,ToDoListTopic));
+                                if (UserEmail.contains(ToDoListOwner))
+                                {
+                                    ToDoListTopic = todo.getString("ToDoListTopic");
+                                    ToDoListNumber = todo.getInt("ToDoListNumber");
+
+                                    ModelToDoLists.add(new ModelToDoList(ToDoListNumber,ToDoListTopic));
+                                }
+
                             }
 
                             ToDoListAdapter = new RecylerViewAdapterToDoList(ModelToDoLists, getActivity());
