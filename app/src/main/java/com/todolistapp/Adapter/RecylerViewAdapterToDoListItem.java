@@ -46,7 +46,6 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
         holder.textViewToDoListItemName.setText(ModelToDoListItems.get(position).getToDoListItemTopic());
 
-
     }
 
     @Override
