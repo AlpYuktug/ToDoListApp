@@ -8,6 +8,8 @@ public class VolleyNetworkCall {
     public String UserRegisterUrl = BaseURL+ "user/userregister?UserMail=";
 
     public String ToDoListUrl = BaseURL+ "todo/todolist";
+    public String ToDoListItemUrl = BaseURL+ "todo/todolistitem";
+
 
     public String getBaseURL() {
         return BaseURL;
@@ -23,6 +25,10 @@ public class VolleyNetworkCall {
 
     public String getToDoListUrl() {
         return ToDoListUrl;
+    }
+
+    public String getToDoListItemUrl() {
+        return ToDoListItemUrl;
     }
 
 

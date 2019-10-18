@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,10 +41,15 @@ public class Home extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             switch (item.getItemId()) {
-                case R.id.ItemAddToDoList:
+                case R.id.ItemDisplayToDoList:
                     Fragment fragment = new FragmentToDoList();
                     GetFragment(fragment);
                     return true;
+
+                case R.id.ItemLogout:
+                    finish();
+                    Intent intent = new Intent(Home.this, Login.class);
+                    startActivity(intent);
                 }
 
             return false;
