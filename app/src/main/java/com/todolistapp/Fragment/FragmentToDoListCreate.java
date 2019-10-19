@@ -77,7 +77,7 @@ public class FragmentToDoListCreate extends Fragment {
         editTextToDoItemDesc =  view.findViewById(R.id.editTextToDoItemDesc);
         imageViewToDoListAdd =  view.findViewById(R.id.imageViewToDoListAdd);
         imageViewItemAdd     =  view.findViewById(R.id.imageViewItemAdd);
-        imageViewCalendar     =  view.findViewById(R.id.imageViewCalendar);
+        imageViewCalendar    =  view.findViewById(R.id.imageViewCalendar);
         textViewSelectedDate =  view.findViewById(R.id.textViewSelectedDate);
 
 
@@ -106,7 +106,7 @@ public class FragmentToDoListCreate extends Fragment {
             @Override
             public void onClick(View view) {
                 if(ItemCount>0)
-                ToDoListCreateJSON();
+                    ToDoListItemCreateJSON();
                 else
                     Toast.makeText(getContext(),"Please add a minimum of one activity\n",Toast.LENGTH_LONG).show();
             }
@@ -140,7 +140,9 @@ public class FragmentToDoListCreate extends Fragment {
         return view;
     }
 
-    private void ToDoListCreateJSON() {
+    private void ToDoListItemCreateJSON() {
+
+        ToDoListAddJSON();
 
         String ToDoLisItemAddURL = UrlAddress.getToDoListItemAddUrl();
 
@@ -192,10 +194,11 @@ public class FragmentToDoListCreate extends Fragment {
             protected Map<String, String> getParams() {
 
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("ToDoListTopic", ToDoListTopic);
                 params.put("ToDoListItemTopic", ToDoListItemTopic);
                 params.put("ToDoListItemDescription", ToDoListItemDescription);
                 params.put("ToDoListItemDeadLine", ToDoListItemDeadLine);
-                params.put("ToDoListItemCheck",ToDoListItemCheck);
+                params.put("ToDoListItemCheck","0");
 
                 return params;
             }
@@ -205,6 +208,40 @@ public class FragmentToDoListCreate extends Fragment {
         requestQueue.add(stringRequest);
 
     }
+
+    private void ToDoListAddJSON() {
+
+        String ToDoListItemAddDefaultURL = UrlAddress.getToDoListAddUrl();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemAddDefaultURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("ToDoListTopic", ToDoListTopic);
+                params.put("ToDoListOwner", UserEmail);
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+
+    }
+
 
     public void CheckValue() {
 

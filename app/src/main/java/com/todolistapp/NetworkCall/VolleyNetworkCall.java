@@ -9,6 +9,7 @@ public class VolleyNetworkCall {
 
     public String ToDoListUrl = BaseURL+ "todo/todolist";
     public String ToDoListItemUrl = BaseURL+ "todo/todolistitem";
+    public String ToDoListAddUrl = BaseURL + "todo/addtodolist";
 
     public String ToDoListItemAddDefaultUrl = BaseURL+ "todo/addtodoitemdefault";
     public String ToDoListItemAddUrl = BaseURL+ "todo/addtodoitem";
@@ -40,6 +41,10 @@ public class VolleyNetworkCall {
 
     public String getToDoListItemAddUrl() {
         return ToDoListItemAddUrl;
+    }
+
+    public String getToDoListAddUrl() {
+        return ToDoListAddUrl;
     }
 
 }
