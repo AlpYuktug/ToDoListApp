@@ -1,11 +1,15 @@
 package com.todolistapp.Model;
 
+import java.util.Date;
+
 public class ModelToDoListItem {
 
-    public String ToDoListItemTopic;
-    public Integer ToDoListNumber;
-    public Integer ToDoListItemNumber;
-    public Integer ToDoListItemCheck;
+    public String   ToDoListItemTopic;
+    public String   ToDoListItemDescription;
+    public Integer  ToDoListNumber;
+    public Integer  ToDoListItemNumber;
+    public Integer  ToDoListItemCheck;
+    public Date     ToDoListItemDeadLine;
 
 
     public ModelToDoListItem(Integer ToDoListNumber,Integer ToDoListItemNumber,
@@ -24,6 +28,13 @@ public class ModelToDoListItem {
         this.ToDoListItemTopic = ToDoListItemTopic;
     }
 
+    public String getToDoListItemDescription() {
+        return ToDoListItemDescription;
+    }
+
+    public void setToDoListItemDescription(String ToDoListItemDescription) {
+        this.ToDoListItemDescription = ToDoListItemDescription;
+    }
 
     public Integer getToDoListNumber() {
         return ToDoListNumber;
@@ -49,6 +60,14 @@ public class ModelToDoListItem {
 
     public void setToDoListItemCheck(Integer ToDoListItemCheck) {
         this.ToDoListItemCheck = ToDoListItemCheck;
+    }
+
+    public Date getToDoListItemDeadLine() {
+        return ToDoListItemDeadLine;
+    }
+
+    public void setToDoListItemDeadLine(Date ToDoListItemDeadLine) {
+        this.ToDoListItemDeadLine = ToDoListItemDeadLine;
     }
 
 }

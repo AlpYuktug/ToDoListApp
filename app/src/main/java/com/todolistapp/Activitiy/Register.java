@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -56,8 +55,8 @@ public class Register extends AppCompatActivity {
         UrlAddress = new VolleyNetworkCall();
 
 
-        editTextUserEmail = findViewById(R.id.editTextUserEmail);
-        editTextUserPassword = findViewById(R.id.editTextUserPassword);
+        editTextUserEmail = findViewById(R.id.editTextToDoListName);
+        editTextUserPassword = findViewById(R.id.editTextToDoItemName);
 
         requestQueue = Volley.newRequestQueue(Register.this);
         progressDialog = new ProgressDialog(Register.this);

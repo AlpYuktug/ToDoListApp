@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.todolistapp.Fragment.FragmentToDoList;
+import com.todolistapp.Fragment.FragmentToDoListCreate;
 import com.todolistapp.R;
 
 public class Home extends AppCompatActivity {
@@ -44,6 +45,11 @@ public class Home extends AppCompatActivity {
                 case R.id.ItemDisplayToDoList:
                     Fragment fragment = new FragmentToDoList();
                     GetFragment(fragment);
+                    return true;
+
+                case R.id.ItemAddToDoList:
+                    Fragment fragmentAddToDoList = new FragmentToDoListCreate();
+                    GetFragment(fragmentAddToDoList);
                     return true;
 
                 case R.id.ItemLogout:

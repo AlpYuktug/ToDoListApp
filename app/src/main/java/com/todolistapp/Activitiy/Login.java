@@ -58,8 +58,8 @@ public class Login extends AppCompatActivity {
         UrlAddress = new VolleyNetworkCall();
 
 
-        editTextUserEmail = findViewById(R.id.editTextUserEmail);
-        editTextUserPassword = findViewById(R.id.editTextUserPassword);
+        editTextUserEmail = findViewById(R.id.editTextToDoListName);
+        editTextUserPassword = findViewById(R.id.editTextToDoItemName);
 
         requestQueue = Volley.newRequestQueue(Login.this);
         progressDialog = new ProgressDialog(Login.this);
