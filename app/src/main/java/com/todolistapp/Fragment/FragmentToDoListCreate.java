@@ -55,6 +55,7 @@ public class FragmentToDoListCreate extends Fragment {
 
     public SharedPreferences UserInformationSP;
     public String UserEmail;
+    public Integer ItemCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class FragmentToDoListCreate extends Fragment {
         imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ItemCount++;
                 ToDoListItemAddJSON();
 
             }
@@ -99,9 +100,10 @@ public class FragmentToDoListCreate extends Fragment {
         imageViewToDoListAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(ItemCount>0)
                 ToDoListCreateJSON();
-
+                else
+                    Toast.makeText(getContext(),"Please add a minimum of one activity\n",Toast.LENGTH_LONG).show();
             }
         });
 

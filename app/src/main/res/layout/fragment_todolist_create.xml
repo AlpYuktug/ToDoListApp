@@ -7,135 +7,172 @@
     android:background="@drawable/background"
     android:layout_height="match_parent">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/editTextToDoListName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutTop"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:ems="16"
-        android:hint="To Do Name"
-        android:inputType="textEmailAddress"
-        android:scrollbarThumbHorizontal="@android:color/background_light"
-        android:scrollbarThumbVertical="@android:color/background_light"
-        android:textColor="@android:color/background_light"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@android:color/transparent"
+        android:layout_height="304dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:met_floatingLabel="highlight"
-        app:met_textColor="@color/colorAccent"
-        app:met_textColorHint="@color/colorAccent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/editTextToDoItemName"
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/editTextToDoListName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="50dp"
+            android:ems="16"
+            android:hint="To Do Name"
+            android:inputType="textEmailAddress"
+            android:scrollbarThumbHorizontal="@android:color/background_light"
+            android:scrollbarThumbVertical="@android:color/background_light"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@color/colorAccent"
+            android:textColorLink="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:met_floatingLabel="highlight"
+            app:met_textColor="@color/colorAccent"
+            app:met_textColorHint="@color/colorAccent" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/editTextToDoItemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="16"
+            android:hint="To Do Item Name"
+            android:inputType="textEmailAddress"
+            android:scrollbarThumbHorizontal="@android:color/background_light"
+            android:scrollbarThumbVertical="@android:color/background_light"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@color/colorAccent"
+            android:textColorLink="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/editTextToDoItemDesc"
+            app:layout_constraintEnd_toEndOf="@+id/editTextToDoListName"
+            app:layout_constraintStart_toStartOf="@+id/editTextToDoListName"
+            app:layout_constraintTop_toBottomOf="@+id/editTextToDoListName"
+            app:met_floatingLabel="highlight"
+            app:met_textColor="@color/colorAccent"
+            app:met_textColorHint="@color/colorAccent" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/editTextToDoItemDesc"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="24dp"
+            android:ems="16"
+            android:hint="To Do Item Description"
+            android:inputType="textEmailAddress"
+            android:scrollbarThumbHorizontal="@android:color/background_light"
+            android:scrollbarThumbVertical="@android:color/background_light"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@color/colorAccent"
+            android:textColorLink="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/editTextToDoItemName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextToDoItemName"
+            app:met_floatingLabel="highlight"
+            app:met_textColor="@color/colorAccent"
+            app:met_textColorHint="@color/colorAccent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutMiddle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:ems="16"
-        android:hint="To Do Item Name"
-        android:inputType="textEmailAddress"
-        android:scrollbarThumbHorizontal="@android:color/background_light"
-        android:scrollbarThumbVertical="@android:color/background_light"
-        android:textColor="@android:color/background_light"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextToDoListName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextToDoListName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextToDoListName"
-        app:met_floatingLabel="highlight"
-        app:met_textColor="@color/colorAccent"
-        app:met_textColorHint="@color/colorAccent" />
+        android:layout_height="181dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTop">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/editTextToDoItemDesc"
-        android:layout_width="350dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="28dp"
-        android:ems="16"
-        android:hint="To Do Item Description"
-        android:inputType="textEmailAddress"
-        android:scrollbarThumbHorizontal="@android:color/background_light"
-        android:scrollbarThumbVertical="@android:color/background_light"
-        android:textColor="@android:color/background_light"
-        android:textColorHint="@color/colorAccent"
-        android:textColorLink="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextToDoListName"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextToDoListName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextToDoItemName"
-        app:met_floatingLabel="highlight"
-        app:met_textColor="@color/colorAccent"
-        app:met_textColorHint="@color/colorAccent" />
 
-    <ImageView
-        android:id="@+id/imageViewToDoListAdd"
-        android:layout_width="196dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="40dp"
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
+            android:text="To Do Item DeadLine"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewCalendar"
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@+id/textViewDate"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate"
+            app:srcCompat="@drawable/calendaricon" />
+
+        <TextView
+            android:id="@+id/textViewSelectedDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCalendar"
+            app:layout_constraintEnd_toEndOf="@+id/textViewDate"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCalendar"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCalendar" />
+
+        <ImageView
+            android:id="@+id/imageViewItemAdd"
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewSelectedDate"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCalendar"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSelectedDate"
+            app:layout_constraintVertical_bias="0.636"
+            app:srcCompat="@drawable/newtodo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutButtom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/button" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutMiddle">
 
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="To Do Item DeadLine"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextToDoItemDesc"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextToDoItemDesc"
-        app:layout_constraintTop_toBottomOf="@+id/editTextToDoItemDesc" />
 
-    <ImageView
-        android:id="@+id/imageViewCalendar"
-        android:layout_width="100dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewItemAdd"
-        app:layout_constraintStart_toStartOf="@+id/textViewDate"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate"
-        app:srcCompat="@drawable/calendaricon" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecylerViewItemList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewSelectedDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/colorAccent"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewCalendar"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDate"
-        app:layout_constraintStart_toEndOf="@+id/imageViewCalendar"
-        app:layout_constraintTop_toTopOf="@+id/imageViewCalendar" />
+        <ImageView
+            android:id="@+id/imageViewToDoListAdd"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/RecylerViewItemList"
+            app:layout_constraintStart_toStartOf="@+id/RecylerViewItemList"
+            app:srcCompat="@drawable/button" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecylerViewItemList"
-        android:layout_width="349dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewToDoListAdd"
-        app:layout_constraintEnd_toEndOf="@+id/textViewSelectedDate"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewCalendar" />
 
-    <ImageView
-        android:id="@+id/imageViewItemAdd"
-        android:layout_width="100dp"
-        android:layout_height="85dp"
-        app:layout_constraintBottom_toTopOf="@+id/RecylerViewItemList"
-        app:layout_constraintEnd_toEndOf="@+id/RecylerViewItemList"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/RecylerViewItemList"
-        app:srcCompat="@drawable/newtodo" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
