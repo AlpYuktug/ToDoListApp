@@ -1,11 +1,14 @@
 package com.todolistapp.Fragment;
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +49,10 @@ public class FragmentToDoListCreate extends Fragment {
     }
 
     public EditText editTextToDoListName,editTextToDoItemName,editTextToDoItemDesc;
-    public ImageView imageViewToDoListAdd,imageViewItemAdd;
+    public ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
     public TextView textViewSelectedDate;
 
-    public String ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemCheck;
+    public String ToDoListTopic,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemCheck;
 
     private RequestQueue mQueue;
     public VolleyNetworkCall UrlAddress;
@@ -56,7 +60,7 @@ public class FragmentToDoListCreate extends Fragment {
     public SharedPreferences UserInformationSP;
     public String UserEmail;
     public Integer ItemCount = 0;
-
+    public Boolean EditTextControl;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +77,7 @@ public class FragmentToDoListCreate extends Fragment {
         editTextToDoItemDesc =  view.findViewById(R.id.editTextToDoItemDesc);
         imageViewToDoListAdd =  view.findViewById(R.id.imageViewToDoListAdd);
         imageViewItemAdd     =  view.findViewById(R.id.imageViewItemAdd);
+        imageViewCalendar     =  view.findViewById(R.id.imageViewCalendar);
         textViewSelectedDate =  view.findViewById(R.id.textViewSelectedDate);
 
 
@@ -104,6 +109,31 @@ public class FragmentToDoListCreate extends Fragment {
                 ToDoListCreateJSON();
                 else
                     Toast.makeText(getContext(),"Please add a minimum of one activity\n",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        imageViewCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar takvim = Calendar.getInstance();
+                int year = takvim.get(Calendar.YEAR);
+                int month = takvim.get(Calendar.MONTH);
+                int day = takvim.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dpd = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                month += 1;
+                                textViewSelectedDate.setText(year + "-" + month + "-" + dayOfMonth);
+                                ToDoListItemDeadLine = year + "-" + month + "-" + dayOfMonth;
+                            }
+                        }, year, month, day);
+
+                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Choose", dpd);
+                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Cancel", dpd);
+                dpd.show();
+
             }
         });
 
@@ -141,6 +171,8 @@ public class FragmentToDoListCreate extends Fragment {
 
     private void ToDoListItemAddJSON() {
 
+        CheckValue();
+
         String ToDoListItemAddDefaultURL = UrlAddress.getToDoListItemAddDefaultUrl();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemAddDefaultURL,
@@ -172,6 +204,20 @@ public class FragmentToDoListCreate extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
 
+    }
+
+    public void CheckValue() {
+
+        ToDoListTopic = editTextToDoListName.getText().toString().trim();
+        ToDoListItemTopic = editTextToDoItemName.getText().toString().trim();
+        ToDoListItemDescription = editTextToDoItemDesc.getText().toString().trim();
+        ToDoListItemDeadLine = textViewSelectedDate.getText().toString().trim();
+
+        if (TextUtils.isEmpty(ToDoListTopic) || TextUtils.isEmpty(ToDoListItemTopic)|| TextUtils.isEmpty(ToDoListItemDescription)|| TextUtils.isEmpty(ToDoListItemDeadLine)) {
+            EditTextControl = false;
+        } else {
+            EditTextControl = true;
+        }
     }
 
 }
