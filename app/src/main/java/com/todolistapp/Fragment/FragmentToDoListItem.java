@@ -107,7 +107,7 @@ public class FragmentToDoListItem extends Fragment {
                                 {
                                      ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
                                      ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
-                                     ToDoListItemCheck = todoitem.getInt("ToDoListNumber");
+                                     ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
                                      ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
                                      ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
 

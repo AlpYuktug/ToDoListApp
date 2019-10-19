@@ -17,7 +17,7 @@ public class ModelToDoListItem {
         this.ToDoListNumber = ToDoListNumber;
         this.ToDoListItemNumber = ToDoListItemNumber;
         this.ToDoListItemCheck = ToDoListItemCheck;
-        this.ToDoListItemTopic = ToDoListItemDescription;
+        this.ToDoListItemTopic = ToDoListItemTopic;
         this.ToDoListItemDescription = ToDoListItemDescription;
         this.ToDoListItemDeadLine = ToDoListItemDeadLine;
     }
