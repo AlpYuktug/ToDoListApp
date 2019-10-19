@@ -9,15 +9,17 @@ public class ModelToDoListItem {
     public Integer  ToDoListNumber;
     public Integer  ToDoListItemNumber;
     public Integer  ToDoListItemCheck;
-    public Date     ToDoListItemDeadLine;
+    public String     ToDoListItemDeadLine;
 
 
     public ModelToDoListItem(Integer ToDoListNumber,Integer ToDoListItemNumber,
-                             Integer ToDoListItemCheck,String ToDoListItemTopic) {
+                             Integer ToDoListItemCheck,String ToDoListItemTopic,String ToDoListItemDescription, String ToDoListItemDeadLine) {
         this.ToDoListNumber = ToDoListNumber;
         this.ToDoListItemNumber = ToDoListItemNumber;
         this.ToDoListItemCheck = ToDoListItemCheck;
-        this.ToDoListItemTopic = ToDoListItemTopic;
+        this.ToDoListItemTopic = ToDoListItemDescription;
+        this.ToDoListItemDescription = ToDoListItemDescription;
+        this.ToDoListItemDeadLine = ToDoListItemDeadLine;
     }
 
     public String getToDoListItemTopic() {
@@ -62,11 +64,11 @@ public class ModelToDoListItem {
         this.ToDoListItemCheck = ToDoListItemCheck;
     }
 
-    public Date getToDoListItemDeadLine() {
+    public String getToDoListItemDeadLine() {
         return ToDoListItemDeadLine;
     }
 
-    public void setToDoListItemDeadLine(Date ToDoListItemDeadLine) {
+    public void setToDoListItemDeadLine(String ToDoListItemDeadLine) {
         this.ToDoListItemDeadLine = ToDoListItemDeadLine;
     }
 

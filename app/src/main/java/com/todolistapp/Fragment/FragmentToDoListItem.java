@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -38,7 +39,7 @@ public class FragmentToDoListItem extends Fragment {
     public FragmentToDoListItem() {
     }
 
-    String ToDoListItemTopic;
+    String ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine;
     Integer ToDoListNumber;
     Integer ToDoListItemNumber;
     Integer ToDoListItemCheck;
@@ -107,8 +108,10 @@ public class FragmentToDoListItem extends Fragment {
                                      ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
                                      ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
                                      ToDoListItemCheck = todoitem.getInt("ToDoListNumber");
+                                     ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
+                                     ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
 
-                                     ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic));
+                                     ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
                                 }
 
 

@@ -45,6 +45,8 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
     public void onBindViewHolder(RecylerViewAdapterToDoListItem.ToDoListItemViewHolder holder, final int position) {
 
         holder.textViewToDoListItemName.setText(ModelToDoListItems.get(position).getToDoListItemTopic());
+        holder.textViewToDoListItemDescription.setText(ModelToDoListItems.get(position).getToDoListItemDescription());
+        holder.textViewToDoListItemDeadLine.setText(String.valueOf(ModelToDoListItems.get(position).getToDoListItemDeadLine()));
 
     }
 
@@ -55,12 +57,13 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
     public class ToDoListItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewToDoListItemName;
+        TextView textViewToDoListItemName,textViewToDoListItemDescription,textViewToDoListItemDeadLine;
 
         public ToDoListItemViewHolder(View view) {
             super(view);
             textViewToDoListItemName=view.findViewById(R.id.textViewToDoListItemName);
-
+            textViewToDoListItemDescription=view.findViewById(R.id.textViewToDoListItemDescription);
+            textViewToDoListItemDeadLine=view.findViewById(R.id.textViewToDoListItemDeadLine);
         }
     }
 }
