@@ -17,6 +17,9 @@ public class VolleyNetworkCall {
     public String ToDoListItemDeleteddUrl = BaseURL+ "todo/deletetodoitem";
     public String ToDoListDeletedUrl = BaseURL+ "todo/deletetodolist";
 
+    public String ToDoListItemAddExistUrl = BaseURL+ "todo/addtooitemexist";
+
+
     public String getBaseURL() {
         return BaseURL;
     }
@@ -60,6 +63,11 @@ public class VolleyNetworkCall {
     public String getToDoListDeleteddUrl() {
         return ToDoListDeletedUrl;
     }
+
+    public String getToDoListItemAddExistUrl() {
+        return ToDoListItemAddExistUrl;
+    }
+
 
 }
 

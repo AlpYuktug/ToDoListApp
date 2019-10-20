@@ -66,6 +66,8 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
                 SharedPreferences sharedPref = context.getSharedPreferences("ToDoListNumberStroge",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt("TodoListNumber",ModelToDoLists.get(position).getToDoListNumber());
+                editor.putString("TodoListTopic",ModelToDoLists.get(position).getToDoListTopic());
+
                 editor.commit();
 
                 Fragment fragment = new FragmentToDoListItem();
