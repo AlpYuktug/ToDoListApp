@@ -63,9 +63,7 @@ public class FragmentToDoListItem extends Fragment {
 
     public CoordinatorLayout coordinatorLayout;
 
-
     public VolleyNetworkCall UrlAddress;
-    public Integer PositionSwipe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,19 +86,19 @@ public class FragmentToDoListItem extends Fragment {
 
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
 
-
         RecylerViewToDoListItem = (RecyclerView) view.findViewById(R.id.RecylerViewToDoListItem);
         RecylerViewToDoListItem.setHasFixedSize(true);
         RecylerViewToDoListItem.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
 
         mQueue = Volley.newRequestQueue(getActivity());
 
-        ToDoListJSONParse();
         enableSwipeToDeleteAndUndo();
         return view;
     }
 
     private void ToDoListJSONParse() {
+
+        ModelToDoListItems.clear();
 
         String ToDoListURL = UrlAddress.getToDoListItemUrl();
 
@@ -148,7 +146,6 @@ public class FragmentToDoListItem extends Fragment {
         mQueue.add(request);
     }
 
-
     private void enableSwipeToDeleteAndUndo() {
 
             SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
@@ -156,7 +153,6 @@ public class FragmentToDoListItem extends Fragment {
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
                     final int position = viewHolder.getAdapterPosition();
-                    PositionSwipe = position;
                     ToDoListItemAdapter.removeItem(position);
 
                     Snackbar snackbar = Snackbar
@@ -168,5 +164,7 @@ public class FragmentToDoListItem extends Fragment {
             };
             ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
             itemTouchhelper.attachToRecyclerView(RecylerViewToDoListItem);
+
+            ToDoListJSONParse();
         }
 }

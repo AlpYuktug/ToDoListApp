@@ -12,17 +12,32 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.todolistapp.Activitiy.Home;
 import com.todolistapp.Fragment.FragmentToDoListItem;
 import com.todolistapp.Model.ModelToDoList;
+import com.todolistapp.NetworkCall.VolleyNetworkCall;
 import com.todolistapp.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerViewAdapterToDoList.ToDoListViewHolder>{
 
     Context context;
     private List<ModelToDoList> ModelToDoLists;
+    public Integer Position=0;
+
+    public VolleyNetworkCall UrlAddress;
+    private RequestQueue mQueue;
+
+    public Map<String, String> paramsdelete;
 
     public RecylerViewAdapterToDoList(List<ModelToDoList> ModelToDoLists, Context context) {
         this.ModelToDoLists = ModelToDoLists;
@@ -36,13 +51,12 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
         return gvh;
     }
 
-    public void DeleteItem(int position) {
-        ModelToDoLists.remove(position);
-        notifyItemRemoved(position);
-    }
 
     @Override
     public void onBindViewHolder(RecylerViewAdapterToDoList.ToDoListViewHolder holder, final int position) {
+
+        UrlAddress = new VolleyNetworkCall();
+        mQueue = Volley.newRequestQueue(context);
 
         holder.textViewToDoListName.setText(ModelToDoLists.get(position).getToDoListTopic());
 
@@ -78,6 +92,48 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
             textViewToDoListName=view.findViewById(R.id.textViewToDoListName);
 
         }
+    }
+
+    private void DeleteList() {
+
+        String ToDoListItemDeletedURL = UrlAddress.getToDoListDeleteddUrl();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemDeletedURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        //Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                paramsdelete = new HashMap<String, String>();
+                paramsdelete.put("ToDoListNumber", ModelToDoLists.get(Position).getToDoListNumber().toString());
+                return paramsdelete;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void removeItem(int position) {
+        Position=position;
+        DeleteList();
+    }
+
+
+    public void removeItemList(int position) {
+        ModelToDoLists.remove(position);
+        notifyItemRemoved(position);
     }
 }
 

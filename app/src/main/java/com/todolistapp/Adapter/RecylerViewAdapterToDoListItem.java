@@ -114,13 +114,13 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -148,13 +148,14 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -169,16 +170,17 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-
     }
 
     public void removeItem(int position) {
         Position=position;
         DeleteItem();
-        //ModelToDoListItems.remove(position);
-        //notifyItemRemoved(position);
     }
 
+    public void removeItemList(int position) {
+        ModelToDoListItems.remove(position);
+        notifyItemRemoved(position);
+    }
 }
 
 
