@@ -20,6 +20,7 @@ import com.todolistapp.Model.ModelToDoListItem;
 import com.todolistapp.NetworkCall.VolleyNetworkCall;
 import com.todolistapp.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         ModelToDoListItems.remove(position);
         notifyItemRemoved(position);
     }
+
 
     @Override
     public void onBindViewHolder(final RecylerViewAdapterToDoListItem.ToDoListItemViewHolder holder, final int position) {
@@ -93,6 +95,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
     public int getItemCount() {
         return ModelToDoListItems.size();
     }
+
 
     public class ToDoListItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -140,6 +143,15 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
+    }
+
+    public void removeItem(int position) {
+        ModelToDoListItems.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public List<ModelToDoListItem> getData() {
+        return ModelToDoListItems;
     }
 
 }
