@@ -36,6 +36,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
     public Integer Position;
     private RequestQueue mQueue;
 
+    public Map<String, String> paramsdelete;
 
     public RecylerViewAdapterToDoListItem(List<ModelToDoListItem> ModelToDoListItems, Context context) {
         this.ModelToDoListItems = ModelToDoListItems;
@@ -48,12 +49,6 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         RecylerViewAdapterToDoListItem.ToDoListItemViewHolder gvh = new RecylerViewAdapterToDoListItem.ToDoListItemViewHolder(v);
         return gvh;
     }
-
-    public void DeleteItem(int position) {
-        ModelToDoListItems.remove(position);
-        notifyItemRemoved(position);
-    }
-
 
     @Override
     public void onBindViewHolder(final RecylerViewAdapterToDoListItem.ToDoListItemViewHolder holder, final int position) {
@@ -75,17 +70,17 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.completedicon);
-                    Toast.makeText(context,"Mission Complated",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Mission Completed",Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="1";
-                    ChangeComplated();
+                    ChangeCompleted();
                 }
                 else
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
-                    Toast.makeText(context,"Mission UnComplated",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Mission UnCompleted",Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="0";
-                    ChangeComplated();
+                    ChangeCompleted();
                 }
             }
         });
@@ -111,7 +106,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         }
     }
 
-    private void ChangeComplated() {
+    private void ChangeCompleted() {
 
         String ToDoListItemUpdateComplateURL = UrlAddress.getToDoListItemUpdateComplatedUrl();
 
@@ -145,13 +140,43 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
     }
 
-    public void removeItem(int position) {
-        ModelToDoListItems.remove(position);
-        notifyItemRemoved(position);
+    private void DeleteItem() {
+
+        String ToDoListItemDeletedURL = UrlAddress.getToDoListItemDeleteddUrl();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemDeletedURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String ServerResponse) {
+                        Toast.makeText(context, ServerResponse, Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(context, volleyError.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                paramsdelete = new HashMap<String, String>();
+                paramsdelete.put("ToDoListNumber", ModelToDoListItems.get(Position).getToDoListNumber().toString());
+                paramsdelete.put("ToDoListItemNumber", ModelToDoListItems.get(Position).getToDoListItemNumber().toString());
+                return paramsdelete;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
     }
 
-    public List<ModelToDoListItem> getData() {
-        return ModelToDoListItems;
+    public void removeItem(int position) {
+        Position=position;
+        DeleteItem();
+        //ModelToDoListItems.remove(position);
+        //notifyItemRemoved(position);
     }
 
 }

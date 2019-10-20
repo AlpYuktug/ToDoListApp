@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -20,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.todolistapp.Adapter.RecylerViewAdapterToDoList;
@@ -36,7 +38,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -61,7 +65,7 @@ public class FragmentToDoListItem extends Fragment {
 
 
     public VolleyNetworkCall UrlAddress;
-
+    public Integer PositionSwipe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,13 +129,10 @@ public class FragmentToDoListItem extends Fragment {
 
                                      ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
                                 }
-
-
                             }
 
                             ToDoListItemAdapter = new RecylerViewAdapterToDoListItem(ModelToDoListItems, getActivity());
                             RecylerViewToDoListItem.setAdapter(ToDoListItemAdapter);
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -147,28 +148,24 @@ public class FragmentToDoListItem extends Fragment {
         mQueue.add(request);
     }
 
-        private void enableSwipeToDeleteAndUndo() {
+
+    private void enableSwipeToDeleteAndUndo() {
 
             SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-
                     final int position = viewHolder.getAdapterPosition();
-                   // final ModelToDoListItems item = ToDoListItemAdapter.getData().get(position);
-
+                    PositionSwipe = position;
                     ToDoListItemAdapter.removeItem(position);
 
-
                     Snackbar snackbar = Snackbar
-                            .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+                            .make(coordinatorLayout, "Missions was removed from the list.", Snackbar.LENGTH_LONG);
 
                     snackbar.setActionTextColor(Color.YELLOW);
                     snackbar.show();
-
                 }
             };
-
             ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
             itemTouchhelper.attachToRecyclerView(RecylerViewToDoListItem);
         }
