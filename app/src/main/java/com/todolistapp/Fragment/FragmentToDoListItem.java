@@ -1,9 +1,16 @@
 package com.todolistapp.Fragment;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +24,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +39,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
+import com.todolistapp.Activitiy.OpenPDF;
 import com.todolistapp.Adapter.RecylerViewAdapterToDoList;
 import com.todolistapp.Adapter.RecylerViewAdapterToDoListItem;
 import com.todolistapp.HelperClass.SwipeToDeleteCallback;
@@ -42,6 +52,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +62,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentToDoListItem extends Fragment {
@@ -117,6 +132,12 @@ public class FragmentToDoListItem extends Fragment {
 
         enableSwipeToDeleteAndUndo();
 
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            //ask user for granting permissions on api22+
+            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
+
+
 
         imageViewCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +160,8 @@ public class FragmentToDoListItem extends Fragment {
                 dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Choose", dpd);
                 dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Cancel", dpd);
                 dpd.show();
+
+                createPdf(ModelToDoListItems);
 
             }
         });
@@ -284,5 +307,35 @@ public class FragmentToDoListItem extends Fragment {
             EditTextControl = true;
         }
     }
+
+
+
+    private void createPdf(List<ModelToDoListItem> List){
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        document.finishPage(page);
+
+        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/mypdf/";
+        File file = new File(directory_path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String targetPdf = directory_path+"todo.pdf";
+        File filePath = new File(targetPdf);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+            Toast.makeText(getContext(), "Done", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(getContext(), "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
+        }
+        document.close();
+
+        Intent intent =  new Intent(getContext(), OpenPDF.class);
+        getContext().startActivity(intent);
+
+    }
+
 
 }

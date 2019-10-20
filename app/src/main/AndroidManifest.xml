@@ -7,6 +7,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activitiy.Register"></activity>
+        <activity android:name=".Activitiy.OpenPDF"></activity>
+        <activity android:name=".Activitiy.Register" />
         <activity android:name=".Activitiy.Home" />
         <activity android:name=".Activitiy.Login">
             <intent-filter>
