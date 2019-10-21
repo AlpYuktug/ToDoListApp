@@ -115,15 +115,9 @@ public class FragmentToDoListItem extends Fragment {
 
         UrlAddress = new VolleyNetworkCall();
 
-        editTextToDoItemName =  view.findViewById(R.id.editTextToDoItemName);
-        editTextToDoItemDesc =  view.findViewById(R.id.editTextToDoItemDesc);
-        imageViewToDoListAdd =  view.findViewById(R.id.imageViewToDoListAdd);
-        imageViewItemAdd     =  view.findViewById(R.id.imageViewItemAdd);
-        imageViewCalendar    =  view.findViewById(R.id.imageViewCalendar);
-        textViewSelectedDate =  view.findViewById(R.id.textViewSelectedDate);
-
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
 
+        imageViewItemAdd =  view.findViewById(R.id.imageViewItemAdd);
         RecylerViewToDoListItem = (RecyclerView) view.findViewById(R.id.RecylerViewToDoListItem);
         RecylerViewToDoListItem.setHasFixedSize(true);
         RecylerViewToDoListItem.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
@@ -134,47 +128,24 @@ public class FragmentToDoListItem extends Fragment {
 
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            //ask user for granting permissions on api22+
             ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
 
-
-
-        imageViewCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar takvim = Calendar.getInstance();
-                int year = takvim.get(Calendar.YEAR);
-                int month = takvim.get(Calendar.MONTH);
-                int day = takvim.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dpd = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                month += 1;
-                                textViewSelectedDate.setText(year + "-" + month + "-" + dayOfMonth);
-                                ToDoListItemDeadLine = year + "-" + month + "-" + dayOfMonth;
-                            }
-                        }, year, month, day);
-
-                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Choose", dpd);
-                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Cancel", dpd);
-                dpd.show();
-
-                createPdf(ModelToDoListItems);
-
-            }
-        });
 
         imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToDoListItemAddJSON();
+                //ToDoListItemAddJSON();
+
+                Fragment fragment = new FragmentToDoListAddItem();
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.FragmentContent, fragment)
+                        .commit();
             }
         });
 
         return view;
-
 
     }
 
@@ -272,7 +243,6 @@ public class FragmentToDoListItem extends Fragment {
 
     }
 
-
     private void enableSwipeToDeleteAndUndo() {
 
             SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
@@ -307,8 +277,6 @@ public class FragmentToDoListItem extends Fragment {
             EditTextControl = true;
         }
     }
-
-
 
     private void createPdf(List<ModelToDoListItem> List){
         PdfDocument document = new PdfDocument();
