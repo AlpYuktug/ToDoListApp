@@ -49,23 +49,22 @@ public class FragmentToDoListCreate extends Fragment {
     public FragmentToDoListCreate() {
     }
 
-    public EditText editTextToDoListName;
+    private EditText editTextToDoListName;
 
-    public String ToDoListTopic,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemCheck;
+    private String ToDoListTopic;
 
-    public ImageView imageViewToDoListAdd;
+    private ImageView imageViewToDoListAdd;
 
     private RequestQueue mQueue;
-    public VolleyNetworkCall UrlAddress;
+    private VolleyNetworkCall UrlAddress;
 
-    public SharedPreferences UserInformationSP;
-    public String UserEmail;
-    public Boolean EditTextControl;
+    private SharedPreferences UserInformationSP;
+    private String UserEmail;
+    private Boolean EditTextControl;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -90,22 +89,17 @@ public class FragmentToDoListCreate extends Fragment {
         imageViewToDoListAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 CheckValue();
-
                 if(EditTextControl)
                     ToDoListAddJSON();
                 else
                     Toast.makeText(getContext(),"Please Fill a To-Do List Name",Toast.LENGTH_LONG).show();
             }
         });
-
         return view;
     }
 
-
     private void ToDoListAddJSON() {
-
 
         String ToDoListItemAddDefaultURL = UrlAddress.getToDoListAddUrl();
 

@@ -49,22 +49,21 @@ public class FragmentToDoListAddItem extends Fragment {
 
     String  ToDoListTopic, ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemNumberExist;
 
-    public EditText editTextToDoItemName,editTextToDoItemDesc;
-    public ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
-    public TextView textViewSelectedDate;
+    private EditText editTextToDoItemName,editTextToDoItemDesc;
+    private ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
+    private TextView textViewSelectedDate;
 
     private RequestQueue mQueue;
 
-    public VolleyNetworkCall UrlAddress;
+    private VolleyNetworkCall UrlAddress;
 
-    public Boolean EditTextControl;
+    private Boolean EditTextControl;
 
-    public SharedPreferences ToDoListNumberStrogeSP;
+    private SharedPreferences ToDoListNumberStrogeSP;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -174,7 +173,6 @@ public class FragmentToDoListAddItem extends Fragment {
 
     }
 
-
     public void CheckValue() {
 
         ToDoListItemTopic = editTextToDoItemName.getText().toString().trim();
@@ -186,5 +184,4 @@ public class FragmentToDoListAddItem extends Fragment {
             EditTextControl = true;
         }
     }
-
 }

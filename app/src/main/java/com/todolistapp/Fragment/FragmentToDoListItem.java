@@ -78,21 +78,21 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
     Integer ToDoListItemNumber;
     Integer ToDoListItemCheck;
 
-    public ImageView imageViewItemAdd,imageViewExport;
+    private ImageView imageViewItemAdd,imageViewExport;
 
     private RequestQueue mQueue;
 
-    public List<ModelToDoListItem> ModelToDoListItems;
+    private List<ModelToDoListItem> ModelToDoListItems;
 
-    public RecyclerView RecylerViewToDoListItem;
-    public RecylerViewAdapterToDoListItem ToDoListItemAdapter;
+    private RecyclerView RecylerViewToDoListItem;
+    private RecylerViewAdapterToDoListItem ToDoListItemAdapter;
 
-    public CoordinatorLayout coordinatorLayout;
+    private CoordinatorLayout coordinatorLayout;
 
-    public VolleyNetworkCall UrlAddress;
+    private VolleyNetworkCall UrlAddress;
 
-    public Spinner spinnerOrderList;
-    public List<String> OrderList = new ArrayList<String>();
+    private Spinner spinnerOrderList;
+    private List<String> OrderList = new ArrayList<String>();
 
     private File pdfFile;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
@@ -400,7 +400,13 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         int listSize = ModelToDoListItems.size();
 
         for (int i = 0; i<listSize; i++){
-            document.add(new Paragraph(String.valueOf(ModelToDoListItems.get(i))));
+
+            String MissionDetails = "\n" +"Mission Number: " + ModelToDoListItems.get(i).ToDoListItemNumber + "\n" +
+                    "Mission Name: "+ ModelToDoListItems.get(i).ToDoListItemTopic+ "\n" +
+                    "Mission Description: "+ ModelToDoListItems.get(i).ToDoListItemDescription + "\n" +
+                    "Mission Deadline: "+ ModelToDoListItems.get(i).getToDoListItemDeadLine();
+
+            document.add(new Paragraph(MissionDetails));
         }
 
 

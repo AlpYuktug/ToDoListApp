@@ -47,17 +47,17 @@ public class FragmentToDoList extends Fragment {
 
     private RequestQueue mQueue;
 
-    public List<ModelToDoList> ModelToDoLists;
+    private List<ModelToDoList> ModelToDoLists;
 
-    public RecyclerView RecylerViewToDoList;
-    public RecylerViewAdapterToDoList ToDoListAdapter;
+    private RecyclerView RecylerViewToDoList;
+    private RecylerViewAdapterToDoList ToDoListAdapter;
 
-    public VolleyNetworkCall UrlAddress;
+    private VolleyNetworkCall UrlAddress;
 
-    public SharedPreferences UserInformationSP;
-    public String UserEmail;
+    private SharedPreferences UserInformationSP;
+    private String UserEmail;
 
-    public CoordinatorLayout coordinatorLayout;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +124,6 @@ public class FragmentToDoList extends Fragment {
                             ToDoListAdapter = new RecylerViewAdapterToDoList(ModelToDoLists, getActivity());
                             RecylerViewToDoList.setAdapter(ToDoListAdapter);
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -159,6 +158,4 @@ public class FragmentToDoList extends Fragment {
         itemTouchhelper.attachToRecyclerView(RecylerViewToDoList);
         ToDoListJSONParse();
     }
-
-
 }
