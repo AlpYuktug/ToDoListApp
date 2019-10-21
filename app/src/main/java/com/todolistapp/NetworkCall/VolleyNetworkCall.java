@@ -11,8 +11,6 @@ public class VolleyNetworkCall {
     public String ToDoListItemUrl = BaseURL+ "todo/todolistitem";
     public String ToDoListAddUrl = BaseURL + "todo/addtodolist";
 
-    public String ToDoListItemAddDefaultUrl = BaseURL+ "todo/addtodoitemdefault";
-    public String ToDoListItemAddUrl = BaseURL+ "todo/addtodoitem";
     public String ToDoListItemUpdateCompletedUrl = BaseURL+ "todo/updatetodoitemcomplated";
     public String ToDoListItemDeleteddUrl = BaseURL+ "todo/deletetodoitem";
     public String ToDoListDeletedUrl = BaseURL+ "todo/deletetodolist";
@@ -42,13 +40,6 @@ public class VolleyNetworkCall {
         return ToDoListItemUrl;
     }
 
-    public String getToDoListItemAddDefaultUrl() {
-        return ToDoListItemAddDefaultUrl;
-    }
-
-    public String getToDoListItemAddUrl() {
-        return ToDoListItemAddUrl;
-    }
 
     public String getToDoListAddUrl() {
         return ToDoListAddUrl;
@@ -70,11 +61,10 @@ public class VolleyNetworkCall {
         return ToDoListItemAddExistUrl;
     }
 
+
     public String getToDoListItemOrderCategoryUrl() {
         return ToDoListItemOrderCategoryUrl;
     }
-
-
 
 }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -78,6 +79,24 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
             }
         });
 
+        holder.CardViewToDoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPref = context.getSharedPreferences("ToDoListNumberStroge",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("TodoListNumber",ModelToDoLists.get(position).getToDoListNumber());
+                editor.putString("TodoListTopic",ModelToDoLists.get(position).getToDoListTopic());
+
+                editor.commit();
+
+                Fragment fragment = new FragmentToDoListItem();
+                FragmentManager fm = ((Home) context).getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(R.id.FragmentContent, fragment);
+                ft.commit();
+            }
+        });
+
     }
 
     @Override
@@ -88,11 +107,12 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
     public class ToDoListViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewToDoListName;
+        CardView CardViewToDoList;
 
         public ToDoListViewHolder(View view) {
             super(view);
             textViewToDoListName=view.findViewById(R.id.textViewToDoListName);
-
+            CardViewToDoList=view.findViewById(R.id.CardViewToDoList);
         }
     }
 

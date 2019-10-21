@@ -66,6 +66,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/button" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintStart_toStartOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintTop_toTopOf="@+id/imageViewToDoListAdd" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

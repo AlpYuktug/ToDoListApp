@@ -179,7 +179,6 @@ public class FragmentToDoListAddItem extends Fragment {
 
         ToDoListItemTopic = editTextToDoItemName.getText().toString().trim();
         ToDoListItemDescription = editTextToDoItemDesc.getText().toString().trim();
-        ToDoListItemDeadLine = textViewSelectedDate.getText().toString().trim();
 
         if ( TextUtils.isEmpty(ToDoListItemTopic)|| TextUtils.isEmpty(ToDoListItemDescription)|| TextUtils.isEmpty(ToDoListItemDeadLine)) {
             EditTextControl = false;

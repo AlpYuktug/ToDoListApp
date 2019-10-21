@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="TextView"
+                android:textColor="@android:color/background_light"
                 app:layout_constraintEnd_toEndOf="@+id/textViewToDoListItemName"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textViewToDoListItemName"
@@ -51,10 +51,10 @@
 
             <TextView
                 android:id="@+id/textViewToDoListItemDeadLine"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="200dp"
-                android:text="TextView"
+                android:textColor="@android:color/background_light"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textViewToDoListItemDescription"
                 app:layout_constraintStart_toStartOf="@+id/textViewToDoListItemDescription"

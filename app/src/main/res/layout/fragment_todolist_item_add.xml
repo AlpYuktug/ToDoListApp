@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,23 +10,23 @@
 
     <ImageView
         android:id="@+id/imageViewItemAdd"
-        android:layout_width="0dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewSelectedDate"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSelectedDate"
-        app:srcCompat="@drawable/newtodo" />
+        android:layout_width="242dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSelectedDate"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="@+id/imageViewCalendar"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCalendar"
+        app:srcCompat="@drawable/button" />
 
     <TextView
         android:id="@+id/textViewDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text="To Do Item DeadLine"
         android:textColor="@color/colorAccent"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextToDoItemDesc"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextToDoItemDesc"
@@ -36,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:ems="16"
         android:hint="To Do Item Name"
@@ -46,8 +47,9 @@
         android:textColor="@android:color/background_light"
         android:textColorHint="@color/colorAccent"
         android:textColorLink="@android:color/transparent"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:met_floatingLabel="highlight"
@@ -56,9 +58,10 @@
 
     <ImageView
         android:id="@+id/imageViewCalendar"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="79dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate"
         app:srcCompat="@drawable/calendaricon" />
@@ -67,15 +70,15 @@
         android:id="@+id/textViewSelectedDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="52dp"
         android:gravity="center"
-        android:text="TextView"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewCalendar"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDate"
         app:layout_constraintStart_toEndOf="@+id/imageViewCalendar"
         app:layout_constraintTop_toTopOf="@+id/imageViewCalendar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.685" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editTextToDoItemDesc"
@@ -90,6 +93,7 @@
         android:textColor="@android:color/background_light"
         android:textColorHint="@color/colorAccent"
         android:textColorLink="@android:color/transparent"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextToDoItemName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/editTextToDoItemName"
@@ -97,5 +101,17 @@
         app:met_floatingLabel="highlight"
         app:met_textColor="@color/colorAccent"
         app:met_textColorHint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewItemAdd"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewItemAdd"
+        app:layout_constraintStart_toStartOf="@+id/imageViewItemAdd"
+        app:layout_constraintTop_toTopOf="@+id/imageViewItemAdd" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

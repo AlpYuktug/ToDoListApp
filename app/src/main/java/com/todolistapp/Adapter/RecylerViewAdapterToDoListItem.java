@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -107,6 +108,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
         TextView textViewToDoListItemName,textViewToDoListItemDescription,textViewToDoListItemDeadLine;
         ImageView imageViewCompleted;
+        CardView CardViewToDoListItem;
 
         public ToDoListItemViewHolder(View view) {
             super(view);
@@ -114,6 +116,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
             textViewToDoListItemDescription=view.findViewById(R.id.textViewToDoListItemDescription);
             textViewToDoListItemDeadLine=view.findViewById(R.id.textViewToDoListItemDeadLine);
             imageViewCompleted=view.findViewById(R.id.imageViewCompleted);
+
         }
     }
 

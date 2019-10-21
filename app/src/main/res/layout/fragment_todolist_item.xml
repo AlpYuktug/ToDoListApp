@@ -30,13 +30,12 @@
 
         <ImageView
             android:id="@+id/imageViewItemAdd"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="125dp"
+            android:layout_height="66dp"
             app:layout_constraintEnd_toEndOf="@+id/RecylerViewToDoListItem"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/RecylerViewToDoListItem"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
             app:srcCompat="@drawable/newtodo" />
 
         <Spinner
@@ -60,6 +59,31 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/RecylerViewToDoListItem"
             app:srcCompat="@drawable/button" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Export"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewExport"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewExport"
+            app:layout_constraintStart_toStartOf="@+id/imageViewExport"
+            app:layout_constraintTop_toTopOf="@+id/imageViewExport" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Add New Mission"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewItemAdd"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="@+id/imageViewItemAdd"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
