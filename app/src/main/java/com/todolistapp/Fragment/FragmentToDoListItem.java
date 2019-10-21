@@ -415,24 +415,6 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
 
     }
 
-    private void previewPdf() {
-
-        PackageManager packageManager = getActivity().getPackageManager();
-        Intent testIntent = new Intent(Intent.ACTION_VIEW);
-        testIntent.setType("application/pdf");
-        List list = packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
-        if (list.size() > 0) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            Uri uri = Uri.fromFile(pdfFile);
-            intent.setDataAndType(uri, "application/pdf");
-
-            startActivity(intent);
-        }else{
-            Toast.makeText(getContext(),"Download a PDF Viewer to see the generated PDF",Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
         OrderCategoryName = parent.getItemAtPosition(i).toString();
