@@ -8,6 +8,8 @@ import android.os.Environment;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.todolistapp.R;
 
+import java.io.File;
+
 public class OpenPDF extends AppCompatActivity {
 
     public PDFView pdfView;
@@ -18,10 +20,14 @@ public class OpenPDF extends AppCompatActivity {
         setContentView(R.layout.activity_open_pdf);
         pdfView = findViewById(R.id.pdfView);
 
-        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/mypdf/";
-        String targetPdf = directory_path+"todo.pdf";
+        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
+        if (!docsFolder.exists()) {
+            docsFolder.mkdir();
+        }
+        File pdfFile = new File(docsFolder.getAbsolutePath(), "ToDoList.pdf");
 
-        pdfView.fromAsset(targetPdf).load();
+
+        pdfView.fromFile(pdfFile).load();
 
     }
 }

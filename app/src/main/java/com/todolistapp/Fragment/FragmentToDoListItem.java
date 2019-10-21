@@ -2,6 +2,7 @@ package com.todolistapp.Fragment;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,10 +10,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -42,6 +47,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.todolistapp.Activitiy.OpenPDF;
 import com.todolistapp.Adapter.RecylerViewAdapterToDoList;
 import com.todolistapp.Adapter.RecylerViewAdapterToDoListItem;
@@ -56,8 +65,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,7 +90,7 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
     Integer ToDoListItemNumber;
     Integer ToDoListItemCheck;
 
-    public ImageView imageViewItemAdd;
+    public ImageView imageViewItemAdd,imageViewExport;
 
     private RequestQueue mQueue;
 
@@ -95,6 +106,8 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
     public Spinner spinnerOrderList;
     public List<String> OrderList = new ArrayList<String>();
 
+    private File pdfFile;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +131,8 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
 
         imageViewItemAdd =  view.findViewById(R.id.imageViewItemAdd);
+        imageViewExport =  view.findViewById(R.id.imageViewExport);
+
         RecylerViewToDoListItem = (RecyclerView) view.findViewById(R.id.RecylerViewToDoListItem);
         RecylerViewToDoListItem.setHasFixedSize(true);
         RecylerViewToDoListItem.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
@@ -125,11 +140,6 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         mQueue = Volley.newRequestQueue(getActivity());
 
         enableSwipeToDeleteAndUndo();
-
-        int PERMISSION_ALL = 1;
-        String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-
 
         spinnerOrderList = view.findViewById(R.id.spinnerOrderList);
         spinnerOrderList.setOnItemSelectedListener(this);
@@ -145,6 +155,19 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                         .beginTransaction()
                         .replace(R.id.FragmentContent, fragment)
                         .commit();
+            }
+        });
+
+        imageViewExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    createPdfWrapper();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -272,33 +295,6 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
             ToDoListJSONParse();
         }
 
-    private void createPdf(List<ModelToDoListItem> List){
-        PdfDocument document = new PdfDocument();
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        PdfDocument.Page page = document.startPage(pageInfo);
-
-        document.finishPage(page);
-
-        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/mypdf/";
-        File file = new File(directory_path);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        String targetPdf = directory_path+"todo.pdf";
-        File filePath = new File(targetPdf);
-        try {
-            document.writeTo(new FileOutputStream(filePath));
-            Toast.makeText(getContext(), "Done", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Toast.makeText(getContext(), "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
-        }
-        document.close();
-
-        Intent intent =  new Intent(getContext(), OpenPDF.class);
-        getContext().startActivity(intent);
-
-    }
-
     private void GetOrderList() {
 
         OrderList.clear();
@@ -337,6 +333,105 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         mQueue.add(request);
     }
 
+    private void createPdfWrapper() throws FileNotFoundException, DocumentException {
+
+        int hasWriteStoragePermission = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (hasWriteStoragePermission != PackageManager.PERMISSION_GRANTED) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
+                    showMessageOKCancel("You need to allow access to Storage",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                                REQUEST_CODE_ASK_PERMISSIONS);
+                                    }
+                                }
+                            });
+                    return;
+                }
+
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+            return;
+        }else {
+            createPdf();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    try {
+                        createPdfWrapper();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getContext(), "WRITE_EXTERNAL Permission Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getContext())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    private void createPdf() throws FileNotFoundException, DocumentException {
+
+        File docsFolder = new File(Environment.getExternalStorageDirectory() + "/Documents");
+        if (!docsFolder.exists()) {
+            docsFolder.mkdir();
+            //Log.i(TAG, "Created a new directory for PDF");
+        }
+
+        pdfFile = new File(docsFolder.getAbsolutePath(),"ToDoList.pdf");
+        OutputStream output = new FileOutputStream(pdfFile);
+        Document document = new Document();
+        PdfWriter.getInstance(document, output);
+        document.open();
+            document.add(new Paragraph("DENEME"));
+
+        document.close();
+        //previewPdf();
+        Intent OpenPDF = new Intent(getContext(), com.todolistapp.Activitiy.OpenPDF.class);
+        startActivity(OpenPDF);
+
+    }
+
+    private void previewPdf() {
+
+        PackageManager packageManager = getActivity().getPackageManager();
+        Intent testIntent = new Intent(Intent.ACTION_VIEW);
+        testIntent.setType("application/pdf");
+        List list = packageManager.queryIntentActivities(testIntent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (list.size() > 0) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(pdfFile);
+            intent.setDataAndType(uri, "application/pdf");
+
+            startActivity(intent);
+        }else{
+            Toast.makeText(getContext(),"Download a PDF Viewer to see the generated PDF",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
