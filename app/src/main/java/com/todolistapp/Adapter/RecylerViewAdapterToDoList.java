@@ -2,6 +2,7 @@ package com.todolistapp.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
 
     Context context;
     private List<ModelToDoList> ModelToDoLists;
+
     public Integer Position=0;
 
     public VolleyNetworkCall UrlAddress;
@@ -40,7 +42,7 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
 
     public Map<String, String> paramsdelete;
 
-    public RecylerViewAdapterToDoList(List<ModelToDoList> ModelToDoLists, Context context) {
+    public RecylerViewAdapterToDoList(List<ModelToDoList> ModelToDoLists,Context context) {
         this.ModelToDoLists = ModelToDoLists;
         this.context = context;
     }
@@ -59,7 +61,7 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
 
-        holder.textViewToDoListName.setText(ModelToDoLists.get(position).getToDoListTopic());
+        holder.textViewToDoListName.setText("To-Do List Name:" +ModelToDoLists.get(position).getToDoListTopic());
 
         holder.textViewToDoListName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,13 +152,10 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
     public void removeItem(int position) {
         Position=position;
         DeleteList();
+        ModelToDoLists.remove(Position);
+        notifyItemRemoved(Position);
     }
 
-
-    public void removeItemList(int position) {
-        ModelToDoLists.remove(position);
-        notifyItemRemoved(position);
-    }
 }
 
 

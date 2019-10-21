@@ -68,9 +68,9 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         mQueue = Volley.newRequestQueue(context);
 
 
-        holder.textViewToDoListItemName.setText(ModelToDoListItems.get(position).getToDoListItemTopic());
-        holder.textViewToDoListItemDescription.setText(ModelToDoListItems.get(position).getToDoListItemDescription());
-        holder.textViewToDoListItemDeadLine.setText(String.valueOf(ModelToDoListItems.get(position).getToDoListItemDeadLine()));
+        holder.textViewToDoListItemName.setText("Mission Name:" + ModelToDoListItems.get(position).getToDoListItemTopic());
+        holder.textViewToDoListItemDescription.setText("Mission Description:" + ModelToDoListItems.get(position).getToDoListItemDescription());
+        holder.textViewToDoListItemDeadLine.setText(String.valueOf("Mission Deadline:" + ModelToDoListItems.get(position).getToDoListItemDeadLine()));
 
         if(String.valueOf(ModelToDoListItems.get(position).getToDoListItemCheck()).equals("0"))
             holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
