@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,19 +49,19 @@ public class FragmentToDoListCreate extends Fragment {
     public FragmentToDoListCreate() {
     }
 
-    public EditText editTextToDoListName,editTextToDoItemName,editTextToDoItemDesc;
-    public ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
-    public TextView textViewSelectedDate;
+    public EditText editTextToDoListName;
 
     public String ToDoListTopic,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemCheck;
+
+    public ImageView imageViewToDoListAdd;
 
     private RequestQueue mQueue;
     public VolleyNetworkCall UrlAddress;
 
     public SharedPreferences UserInformationSP;
     public String UserEmail;
-    public Integer ItemCount = 0;
     public Boolean EditTextControl;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +74,7 @@ public class FragmentToDoListCreate extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todolist_create, container, false);
 
         editTextToDoListName =  view.findViewById(R.id.editTextToDoListName);
-        editTextToDoItemName =  view.findViewById(R.id.editTextToDoItemName);
-        editTextToDoItemDesc =  view.findViewById(R.id.editTextToDoItemDesc);
         imageViewToDoListAdd =  view.findViewById(R.id.imageViewToDoListAdd);
-        imageViewItemAdd     =  view.findViewById(R.id.imageViewItemAdd);
-        imageViewCalendar    =  view.findViewById(R.id.imageViewCalendar);
-        textViewSelectedDate =  view.findViewById(R.id.textViewSelectedDate);
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -92,124 +87,20 @@ public class FragmentToDoListCreate extends Fragment {
         UserInformationSP = getContext().getSharedPreferences("UserInformationSP",MODE_PRIVATE);
         UserEmail = UserInformationSP.getString("UserEmail", "");
 
-
-        imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ItemCount++;
-                ToDoListItemAddJSON();
-
-            }
-        });
-
         imageViewToDoListAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ItemCount>0)
-                    ToDoListItemCreateJSON();
-                else
-                    Toast.makeText(getContext(),"Please add a minimum of one activity\n",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        imageViewCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar takvim = Calendar.getInstance();
-                int year = takvim.get(Calendar.YEAR);
-                int month = takvim.get(Calendar.MONTH);
-                int day = takvim.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dpd = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                month += 1;
-                                textViewSelectedDate.setText(year + "-" + month + "-" + dayOfMonth);
-                                ToDoListItemDeadLine = year + "-" + month + "-" + dayOfMonth;
-                            }
-                        }, year, month, day);
-
-                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, "Choose", dpd);
-                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, "Cancel", dpd);
-                dpd.show();
-
+                ToDoListAddJSON();
             }
         });
 
         return view;
     }
 
-    private void ToDoListItemCreateJSON() {
-
-        ToDoListAddJSON();
-
-        String ToDoLisItemAddURL = UrlAddress.getToDoListItemAddUrl();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoLisItemAddURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
-
-    }
-
-    private void ToDoListItemAddJSON() {
-
-        CheckValue();
-
-        String ToDoListItemAddDefaultURL = UrlAddress.getToDoListItemAddDefaultUrl();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemAddDefaultURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("ToDoListTopic", ToDoListTopic);
-                params.put("ToDoListItemTopic", ToDoListItemTopic);
-                params.put("ToDoListItemDescription", ToDoListItemDescription);
-                params.put("ToDoListItemDeadLine", ToDoListItemDeadLine);
-                params.put("ToDoListItemCheck","0");
-
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
-
-    }
 
     private void ToDoListAddJSON() {
+
+        CheckValue();
 
         String ToDoListItemAddDefaultURL = UrlAddress.getToDoListAddUrl();
 
@@ -217,13 +108,19 @@ public class FragmentToDoListCreate extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String ServerResponse) {
-                        Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
+                        Fragment fragment = new FragmentToDoList();
+
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.FragmentContent, fragment)
+                                .commit();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -235,22 +132,17 @@ public class FragmentToDoListCreate extends Fragment {
 
                 return params;
             }
-
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
 
     }
 
-
     public void CheckValue() {
 
         ToDoListTopic = editTextToDoListName.getText().toString().trim();
-        ToDoListItemTopic = editTextToDoItemName.getText().toString().trim();
-        ToDoListItemDescription = editTextToDoItemDesc.getText().toString().trim();
-        ToDoListItemDeadLine = textViewSelectedDate.getText().toString().trim();
 
-        if (TextUtils.isEmpty(ToDoListTopic) || TextUtils.isEmpty(ToDoListItemTopic)|| TextUtils.isEmpty(ToDoListItemDescription)|| TextUtils.isEmpty(ToDoListItemDeadLine)) {
+        if (TextUtils.isEmpty(ToDoListTopic)) {
             EditTextControl = false;
         } else {
             EditTextControl = true;
