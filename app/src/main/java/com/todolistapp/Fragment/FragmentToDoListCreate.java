@@ -90,7 +90,13 @@ public class FragmentToDoListCreate extends Fragment {
         imageViewToDoListAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToDoListAddJSON();
+
+                CheckValue();
+
+                if(EditTextControl)
+                    ToDoListAddJSON();
+                else
+                    Toast.makeText(getContext(),"Please Fill a To-Do List Name",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -100,7 +106,6 @@ public class FragmentToDoListCreate extends Fragment {
 
     private void ToDoListAddJSON() {
 
-        CheckValue();
 
         String ToDoListItemAddDefaultURL = UrlAddress.getToDoListAddUrl();
 
@@ -134,8 +139,8 @@ public class FragmentToDoListCreate extends Fragment {
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
 
+        requestQueue.add(stringRequest);
     }
 
     public void CheckValue() {

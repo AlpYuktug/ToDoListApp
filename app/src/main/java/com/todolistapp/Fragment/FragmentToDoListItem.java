@@ -406,10 +406,15 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         Document document = new Document();
         PdfWriter.getInstance(document, output);
         document.open();
-            document.add(new Paragraph("DENEME"));
+
+        int listSize = ModelToDoListItems.size();
+
+        for (int i = 0; i<listSize; i++){
+            document.add(new Paragraph(String.valueOf(ModelToDoListItems.get(i))));
+        }
+
 
         document.close();
-        //previewPdf();
         Intent OpenPDF = new Intent(getContext(), com.todolistapp.Activitiy.OpenPDF.class);
         startActivity(OpenPDF);
 
