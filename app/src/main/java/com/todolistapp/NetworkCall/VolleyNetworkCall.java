@@ -19,6 +19,8 @@ public class VolleyNetworkCall {
 
     public String ToDoListItemAddExistUrl = BaseURL+ "todo/addtooitemexist";
 
+    public String ToDoListItemOrderCategoryUrl = BaseURL+ "todo/ordercategory";
+
 
     public String getBaseURL() {
         return BaseURL;
@@ -67,6 +69,11 @@ public class VolleyNetworkCall {
     public String getToDoListItemAddExistUrl() {
         return ToDoListItemAddExistUrl;
     }
+
+    public String getToDoListItemOrderCategoryUrl() {
+        return ToDoListItemOrderCategoryUrl;
+    }
+
 
 
 }

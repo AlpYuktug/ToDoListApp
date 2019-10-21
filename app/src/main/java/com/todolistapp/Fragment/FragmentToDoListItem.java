@@ -16,9 +16,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,20 +69,17 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.Context.MODE_PRIVATE;
 
-public class FragmentToDoListItem extends Fragment {
+public class FragmentToDoListItem extends Fragment implements AdapterView.OnItemSelectedListener {
 
     public FragmentToDoListItem() {
     }
 
-    String  ToDoListTopic, ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemNumberExist;
+    String  ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,OrderCategoryName="";
     Integer ToDoListNumber;
     Integer ToDoListItemNumber;
     Integer ToDoListItemCheck;
 
-    public EditText editTextToDoItemName,editTextToDoItemDesc;
-    public ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
-    public TextView textViewSelectedDate;
-
+    public ImageView imageViewItemAdd;
 
     private RequestQueue mQueue;
 
@@ -92,9 +92,9 @@ public class FragmentToDoListItem extends Fragment {
 
     public VolleyNetworkCall UrlAddress;
 
-    public Boolean EditTextControl;
+    public Spinner spinnerOrderList;
+    public List<String> OrderList = new ArrayList<String>();
 
-    public SharedPreferences ToDoListNumberStrogeSP;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,6 +131,10 @@ public class FragmentToDoListItem extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
 
 
+        spinnerOrderList = view.findViewById(R.id.spinnerOrderList);
+        spinnerOrderList.setOnItemSelectedListener(this);
+
+
         imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +147,8 @@ public class FragmentToDoListItem extends Fragment {
                         .commit();
             }
         });
+
+        GetOrderList();
 
         return view;
 
@@ -171,13 +177,59 @@ public class FragmentToDoListItem extends Fragment {
 
                                 if (ClickToDoListItem == ToDoListNumber)
                                 {
-                                     ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
-                                     ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
-                                     ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
-                                     ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
-                                     ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
+                                    ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
 
-                                     ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
+                                    if(OrderCategoryName.equals("All"))
+                                    {
+                                        ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
+                                        ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
+                                        ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
+                                        ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
+                                        ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
+
+                                        ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
+                                    }
+
+                                    else if(OrderCategoryName.equals("Completed"))
+                                    {
+                                        if (ToDoListItemCheck == 1)
+                                        {
+                                            ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
+                                            ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
+                                            ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
+                                            ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
+                                            ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
+
+                                            ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
+                                        }
+
+                                    }
+
+                                    else if(OrderCategoryName.equals("UnCompleted"))
+                                    {
+                                        if (ToDoListItemCheck == 0)
+                                        {
+                                        ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
+                                        ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
+                                        ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
+                                        ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
+                                        ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
+
+                                        ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
+                                        ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
+                                        ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
+                                        ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
+                                        ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
+
+                                        ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
+                                    }
+
                                 }
                             }
 
@@ -247,4 +299,53 @@ public class FragmentToDoListItem extends Fragment {
 
     }
 
+    private void GetOrderList() {
+
+        OrderList.clear();
+
+        String OrderListUrl = UrlAddress.getToDoListItemOrderCategoryUrl();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, OrderListUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("OrderCategory");
+
+                            OrderList.add("Choose Order Filter");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject category = jsonArray.getJSONObject(i);
+                                OrderCategoryName = category.getString("OrderCategoryName");
+                                OrderList.add(OrderCategoryName);
+                            }
+
+                            ArrayAdapter<String> OrderCategoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_model, OrderList);
+                            OrderCategoryAdapter.setDropDownViewResource(R.layout.spinner_model);
+
+                            spinnerOrderList.setAdapter(OrderCategoryAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+        OrderCategoryName = parent.getItemAtPosition(i).toString();
+        ToDoListJSONParse();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
