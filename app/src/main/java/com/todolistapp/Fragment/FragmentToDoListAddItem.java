@@ -139,7 +139,7 @@ public class FragmentToDoListAddItem extends Fragment {
                     @Override
                     public void onResponse(String ServerResponse) {
                         //Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
-                        Fragment fragment = new FragmentToDoList();
+                        Fragment fragment = new FragmentToDoListItem();
 
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()

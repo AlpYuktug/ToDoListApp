@@ -134,7 +134,6 @@ public class FragmentToDoListItem extends Fragment {
         imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ToDoListItemAddJSON();
 
                 Fragment fragment = new FragmentToDoListAddItem();
 
@@ -199,50 +198,6 @@ public class FragmentToDoListItem extends Fragment {
         mQueue.add(request);
     }
 
-    private void ToDoListItemAddJSON() {
-
-        CheckValue();
-
-        ToDoListNumberStrogeSP = getContext().getSharedPreferences("ToDoListNumberStroge",MODE_PRIVATE);
-        ToDoListItemNumberExist = String.valueOf(ToDoListNumberStrogeSP.getInt("TodoListNumber", 0));
-        ToDoListTopic = ToDoListNumberStrogeSP.getString("TodoListTopic", "");
-
-        String ToDoListItemAddDefaultURL = UrlAddress.getToDoListItemAddExistUrl();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ToDoListItemAddDefaultURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String ServerResponse) {
-                        Toast.makeText(getContext(), ServerResponse, Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("ToDoListNumber", ToDoListItemNumberExist);
-                params.put("ToDoListTopic", ToDoListTopic);
-                params.put("ToDoListItemTopic", ToDoListItemTopic);
-                params.put("ToDoListItemDescription", ToDoListItemDescription);
-                params.put("ToDoListItemDeadLine", ToDoListItemDeadLine);
-                params.put("ToDoListItemCheck","0");
-
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        requestQueue.add(stringRequest);
-
-    }
-
     private void enableSwipeToDeleteAndUndo() {
 
             SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
@@ -264,19 +219,6 @@ public class FragmentToDoListItem extends Fragment {
 
             ToDoListJSONParse();
         }
-
-    public void CheckValue() {
-
-        ToDoListItemTopic = editTextToDoItemName.getText().toString().trim();
-        ToDoListItemDescription = editTextToDoItemDesc.getText().toString().trim();
-        ToDoListItemDeadLine = textViewSelectedDate.getText().toString().trim();
-
-        if ( TextUtils.isEmpty(ToDoListItemTopic)|| TextUtils.isEmpty(ToDoListItemDescription)|| TextUtils.isEmpty(ToDoListItemDeadLine)) {
-            EditTextControl = false;
-        } else {
-            EditTextControl = true;
-        }
-    }
 
     private void createPdf(List<ModelToDoListItem> List){
         PdfDocument document = new PdfDocument();
@@ -304,6 +246,5 @@ public class FragmentToDoListItem extends Fragment {
         getContext().startActivity(intent);
 
     }
-
 
 }
