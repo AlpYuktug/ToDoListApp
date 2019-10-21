@@ -2,11 +2,16 @@ package com.todolistapp.Activitiy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -17,6 +22,8 @@ import com.todolistapp.R;
 
 public class Home extends AppCompatActivity {
 
+    private Toolbar toolbar ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,10 @@ public class Home extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);
         //navigation.setBackgroundColor(getColor(R.color.Back));
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Fragment fragment = new FragmentToDoList();
 
@@ -68,4 +79,5 @@ public class Home extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

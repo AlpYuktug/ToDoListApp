@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +27,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<RecylerViewAdapterToDoListItem.ToDoListItemViewHolder>{
+import android.widget.Filter;
+import android.widget.Filterable;
+
+public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<RecylerViewAdapterToDoListItem.ToDoListItemViewHolder>
+        implements Filterable
+    {
 
     Context context;
     private List<ModelToDoListItem> ModelToDoListItems;
+    private List<ModelToDoListItem> ModelToDoListItemsFiltered;
 
     public VolleyNetworkCall UrlAddress;
 
@@ -40,6 +48,8 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
     public RecylerViewAdapterToDoListItem(List<ModelToDoListItem> ModelToDoListItems, Context context) {
         this.ModelToDoListItems = ModelToDoListItems;
+        this.ModelToDoListItemsFiltered = ModelToDoListItemsFiltered;
+
         this.context = context;
     }
 
@@ -55,6 +65,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
+
 
         holder.textViewToDoListItemName.setText(ModelToDoListItems.get(position).getToDoListItemTopic());
         holder.textViewToDoListItemDescription.setText(ModelToDoListItems.get(position).getToDoListItemDescription());
@@ -181,6 +192,47 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         ModelToDoListItems.remove(position);
         notifyItemRemoved(position);
     }
+
+        @Override
+        public Filter getFilter() {
+
+            return new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence charSequence) {
+
+                    String searchString = charSequence.toString();
+
+                    if (searchString.isEmpty()) {
+
+                        ModelToDoListItemsFiltered = ModelToDoListItems;
+
+                    } else {
+
+                        ArrayList<ModelToDoListItem> tempFilteredList = new ArrayList<>();
+
+                        for (ModelToDoListItem item : ModelToDoListItems) {
+
+                            String ItemTopic = item.getToDoListItemTopic();
+                            if (ItemTopic.contains(searchString)) {
+                                tempFilteredList.add(item);
+                            }
+                        }
+
+                        ModelToDoListItemsFiltered = tempFilteredList;
+                    }
+
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = ModelToDoListItemsFiltered;
+                    return filterResults;
+                }
+
+                @Override
+                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    ModelToDoListItemsFiltered = (ArrayList<ModelToDoListItem>) filterResults.values;
+                    notifyDataSetChanged();
+                }
+            };
+        }
 }
 
 

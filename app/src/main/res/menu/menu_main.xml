@@ -1,0 +1,12 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="Search"
+        appcompat:showAsAction="always"
+        appcompat:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+</menu>

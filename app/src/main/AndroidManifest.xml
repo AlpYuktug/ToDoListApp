@@ -17,9 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activitiy.OpenPDF"></activity>
+
+        <activity android:name=".Activitiy.OpenPDF"/>
         <activity android:name=".Activitiy.Register" />
-        <activity android:name=".Activitiy.Home" />
+        <activity android:name=".Activitiy.Home">
+        </activity>
+
+
         <activity android:name=".Activitiy.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -15,19 +15,19 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="50dp"
         android:ems="16"
-        android:hint="E-Mail"
+        android:hint="User Name"
         android:inputType="textEmailAddress"
         android:scrollbarThumbHorizontal="@android:color/background_light"
         android:scrollbarThumbVertical="@android:color/background_light"
         android:textColor="@android:color/background_light"
         android:textColorHint="@color/colorAccent"
         android:textColorLink="@android:color/transparent"
-        app:met_textColor="@color/colorAccent"
-        app:met_textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:met_floatingLabel="highlight" />
+        app:met_floatingLabel="highlight"
+        app:met_textColor="@color/colorAccent"
+        app:met_textColorHint="@color/colorAccent" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editTextToDoItemName"
@@ -36,7 +36,7 @@
         android:layout_marginTop="44dp"
         android:ems="16"
         android:hint="Password"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:scrollbarThumbHorizontal="@android:color/background_light"
         android:scrollbarThumbVertical="@android:color/background_light"
         android:textColor="@android:color/background_light"
@@ -48,9 +48,9 @@
         app:layout_constraintStart_toStartOf="@+id/editTextToDoListName"
         app:layout_constraintTop_toBottomOf="@+id/editTextToDoListName"
         app:layout_constraintVertical_bias="0.0"
+        app:met_floatingLabel="highlight"
         app:met_textColor="@color/colorAccent"
-        app:met_textColorHint="@color/colorAccent"
-        app:met_floatingLabel="highlight" />
+        app:met_textColorHint="@color/colorAccent" />
 
     <ImageView
         android:id="@+id/imageViewSignUp"
