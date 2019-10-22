@@ -18,13 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activitiy.OpenPDF"/>
-        <activity android:name=".Activitiy.Register" />
-        <activity android:name=".Activitiy.Home">
+        <activity android:name=".Activitiy.OpenPDF" android:screenOrientation="portrait"/>
+        <activity android:name=".Activitiy.Register" android:screenOrientation="portrait" />
+        <activity android:name=".Activitiy.Home" android:screenOrientation="portrait">
         </activity>
 
 
-        <activity android:name=".Activitiy.Login">
+        <activity android:name=".Activitiy.Login" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
