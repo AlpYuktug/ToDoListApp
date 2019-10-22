@@ -189,14 +189,11 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
     public void removeItem(int position) {
         Position=position;
         DeleteItem();
-    }
-
-    public void removeItemList(int position) {
         ModelToDoListItems.remove(position);
         notifyItemRemoved(position);
     }
 
-        @Override
+    @Override
         public Filter getFilter() {
 
             return new Filter() {
@@ -220,7 +217,6 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                                 tempFilteredList.add(item);
                             }
                         }
-
                         ModelToDoListItemsFiltered = tempFilteredList;
                     }
 
@@ -228,7 +224,6 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                     filterResults.values = ModelToDoListItemsFiltered;
                     return filterResults;
                 }
-
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     ModelToDoListItemsFiltered = (ArrayList<ModelToDoListItem>) filterResults.values;
