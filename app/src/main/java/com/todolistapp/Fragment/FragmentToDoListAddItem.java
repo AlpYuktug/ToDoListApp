@@ -53,11 +53,11 @@ public class FragmentToDoListAddItem extends Fragment {
     private ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
     private TextView textViewSelectedDate;
 
-    private RequestQueue mQueue;
+    public RequestQueue mQueue;
 
     private VolleyNetworkCall UrlAddress;
 
-    private Boolean EditTextControl;
+    public Boolean EditTextControl;
 
     private SharedPreferences ToDoListNumberStrogeSP;
 
@@ -114,8 +114,11 @@ public class FragmentToDoListAddItem extends Fragment {
         imageViewItemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                CheckValue();
+                if(EditTextControl)
                 ToDoListItemAddJSON();
+                else
+                    Toast.makeText(getContext(),"Fill the all Blank",Toast.LENGTH_LONG).show();
             }
         });
 
