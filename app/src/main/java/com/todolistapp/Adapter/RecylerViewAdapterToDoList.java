@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.todolistapp.Activitiy.Home;
+import com.todolistapp.Fragment.FragmentToDoList;
 import com.todolistapp.Fragment.FragmentToDoListItem;
 import com.todolistapp.Model.ModelToDoList;
 import com.todolistapp.NetworkCall.VolleyNetworkCall;
@@ -151,8 +152,13 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
     public void removeItem(int position) {
         Position=position;
         DeleteList();
-        ModelToDoLists.remove(position);
-        notifyItemRemoved(position);
+
+        Fragment fragment = new FragmentToDoList();
+        FragmentManager fm = ((Home) context).getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.FragmentContent, fragment);
+        ft.commit();
+
     }
 
 }

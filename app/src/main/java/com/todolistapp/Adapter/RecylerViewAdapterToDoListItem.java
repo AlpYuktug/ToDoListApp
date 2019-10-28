@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -19,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.todolistapp.Activitiy.Home;
+import com.todolistapp.Fragment.FragmentToDoListItem;
 import com.todolistapp.Model.ModelToDoListItem;
 import com.todolistapp.NetworkCall.VolleyNetworkCall;
 import com.todolistapp.R;
@@ -186,8 +191,12 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
     public void removeItem(int position) {
         Position=position;
         DeleteItem();
-        ModelToDoListItems.remove(position);
-        notifyItemRemoved(position);
+
+        Fragment fragment = new FragmentToDoListItem();
+        FragmentManager fm = ((Home) context).getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.FragmentContent, fragment);
+        ft.commit();
     }
 
     @Override
