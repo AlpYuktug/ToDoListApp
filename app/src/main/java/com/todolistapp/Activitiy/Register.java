@@ -54,7 +54,6 @@ public class Register extends AppCompatActivity {
 
         UrlAddress = new VolleyNetworkCall();
 
-
         editTextUserEmail = findViewById(R.id.editTextToDoListName);
         editTextUserPassword = findViewById(R.id.editTextToDoItemName);
 
@@ -79,7 +78,6 @@ public class Register extends AppCompatActivity {
                     else
                         Toast.makeText(Register.this, "Please fill blank.", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -90,6 +88,7 @@ public class Register extends AppCompatActivity {
                 finish();
                 Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
@@ -122,13 +121,15 @@ public class Register extends AppCompatActivity {
 
                         if(ServerResponse.equalsIgnoreCase("\n\nEmail already taken"))
                         {
-
+                            Toast.makeText(Register.this, ServerResponse, Toast.LENGTH_LONG).show();
                         }
                         else
                         {
                             finish();
+                            Toast.makeText(Register.this, ServerResponse, Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
                     }
                 },
@@ -147,9 +148,7 @@ public class Register extends AppCompatActivity {
                 params.put("UserPassword", UserPassword);
                 return params;
             }
-
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(Register.this);
         requestQueue.add(stringRequest);
     }
@@ -171,6 +170,8 @@ public class Register extends AppCompatActivity {
         }
 
     }
+
+
 }
 
 

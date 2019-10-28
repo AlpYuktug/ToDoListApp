@@ -2,18 +2,13 @@ package com.todolistapp.Activitiy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.todolistapp.Fragment.FragmentToDoList;
@@ -78,6 +73,16 @@ public class Home extends AppCompatActivity {
         transaction.replace(R.id.FragmentContent, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
 }

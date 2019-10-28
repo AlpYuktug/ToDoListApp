@@ -25,7 +25,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:ems="16"
-            android:hint="To Do Name"
+            android:hint="@string/ToDoName"
             android:inputType="textEmailAddress"
             android:scrollbarThumbHorizontal="@android:color/background_light"
             android:scrollbarThumbVertical="@android:color/background_light"
@@ -56,28 +56,49 @@
             android:layout_width="0dp"
             android:layout_height="51dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="48dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="248dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/button" />
+
+        <ImageView
+            android:id="@+id/imageViewCancel"
+            android:layout_width="0dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintStart_toStartOf="@+id/imageViewToDoListAdd"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewToDoListAdd"
             app:srcCompat="@drawable/button" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="@string/Done"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewToDoListAdd"
             app:layout_constraintEnd_toEndOf="@+id/imageViewToDoListAdd"
             app:layout_constraintStart_toStartOf="@+id/imageViewToDoListAdd"
             app:layout_constraintTop_toTopOf="@+id/imageViewToDoListAdd" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Cancel"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewCancel"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewCancel"
+            app:layout_constraintStart_toStartOf="@+id/imageViewCancel"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCancel"
+            app:layout_constraintVertical_bias="0.631" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

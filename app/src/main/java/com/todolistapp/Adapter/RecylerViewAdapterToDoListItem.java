@@ -28,8 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.widget.Filter;
-import android.widget.Filterable;
 
 public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<RecylerViewAdapterToDoListItem.ToDoListItemViewHolder>
         implements Filterable
@@ -47,9 +45,9 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
     public Map<String, String> paramsdelete;
 
-    public RecylerViewAdapterToDoListItem(List<ModelToDoListItem> ModelToDoListItems, Context context) {
+    public RecylerViewAdapterToDoListItem(List<ModelToDoListItem> ModelToDoListItems,Context context) {
         this.ModelToDoListItems = ModelToDoListItems;
-        this.ModelToDoListItemsFiltered = ModelToDoListItemsFiltered;
+        ModelToDoListItemsFiltered = new ArrayList<>(ModelToDoListItems);
 
         this.context = context;
     }
@@ -66,7 +64,6 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
 
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
-
 
         holder.textViewToDoListItemName.setText("Mission Name:" + ModelToDoListItems.get(position).getToDoListItemTopic());
         holder.textViewToDoListItemDescription.setText("Mission Description:" + ModelToDoListItems.get(position).getToDoListItemDescription());
@@ -200,33 +197,28 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
 
-                    String searchString = charSequence.toString();
+                    List<ModelToDoListItem> filteredList = new ArrayList<>();
 
-                    if (searchString.isEmpty()) {
-
-                        ModelToDoListItemsFiltered = ModelToDoListItems;
-
+                    if (charSequence == null || charSequence.length() == 0) {
+                        filteredList.addAll(ModelToDoListItemsFiltered);
                     } else {
+                        String filterPattern = charSequence.toString().toLowerCase().trim();
 
-                        ArrayList<ModelToDoListItem> tempFilteredList = new ArrayList<>();
-
-                        for (ModelToDoListItem item : ModelToDoListItems) {
-
-                            String ItemTopic = item.getToDoListItemTopic();
-                            if (ItemTopic.contains(searchString)) {
-                                tempFilteredList.add(item);
+                        for (ModelToDoListItem item : ModelToDoListItemsFiltered) {
+                            if (item.getToDoListItemTopic().toLowerCase().contains(filterPattern)) {
+                                filteredList.add(item);
                             }
                         }
-                        ModelToDoListItemsFiltered = tempFilteredList;
                     }
-
-                    FilterResults filterResults = new FilterResults();
-                    filterResults.values = ModelToDoListItemsFiltered;
-                    return filterResults;
+                    FilterResults results = new FilterResults();
+                    results.values = filteredList;
+                    return results;
                 }
+
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    ModelToDoListItemsFiltered = (ArrayList<ModelToDoListItem>) filterResults.values;
+                    ModelToDoListItems.clear();
+                    ModelToDoListItems.addAll((List) filterResults.values);
                     notifyDataSetChanged();
                 }
             };

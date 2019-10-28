@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.todolistapp.R;
@@ -17,8 +16,6 @@ import com.todolistapp.R;
 import java.io.File;
 
 public class OpenPDF extends AppCompatActivity {
-
-    private static final int BACKUP_FILE_REQUEST_CODE = 1000;
 
     public PDFView pdfView;
     public ImageView imageViewShare;
@@ -39,7 +36,6 @@ public class OpenPDF extends AppCompatActivity {
         }
         pdfFile = new File(docsFolder.getAbsolutePath(), "ToDoList.pdf");
 
-
         pdfView.fromFile(pdfFile).load();
 
         imageViewShare.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +48,5 @@ public class OpenPDF extends AppCompatActivity {
                 startActivity(shares);
             }
         });
-
     }
 }

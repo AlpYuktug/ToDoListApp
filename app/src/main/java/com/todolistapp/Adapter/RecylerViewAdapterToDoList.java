@@ -2,7 +2,6 @@ package com.todolistapp.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,8 +151,8 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
     public void removeItem(int position) {
         Position=position;
         DeleteList();
-        ModelToDoLists.remove(Position);
-        notifyItemRemoved(Position);
+        ModelToDoLists.remove(position);
+        notifyItemRemoved(position);
     }
 
 }

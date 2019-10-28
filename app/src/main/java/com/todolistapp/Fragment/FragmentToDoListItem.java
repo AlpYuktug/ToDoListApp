@@ -100,7 +100,6 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -161,11 +160,8 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                 }
             }
         });
-
         GetOrderList();
-
         return view;
-
     }
 
     private void ToDoListJSONParse() {
@@ -247,7 +243,7 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                                 }
                             }
 
-                            ToDoListItemAdapter = new RecylerViewAdapterToDoListItem(ModelToDoListItems, getActivity());
+                            ToDoListItemAdapter = new RecylerViewAdapterToDoListItem(ModelToDoListItems,getActivity());
                             RecylerViewToDoListItem.setAdapter(ToDoListItemAdapter);
 
                         } catch (JSONException e) {
@@ -451,6 +447,4 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
             }
         });
     }
-
-
 }

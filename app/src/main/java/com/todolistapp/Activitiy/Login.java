@@ -57,7 +57,6 @@ public class Login extends AppCompatActivity {
 
         UrlAddress = new VolleyNetworkCall();
 
-
         editTextUserEmail = findViewById(R.id.editTextToDoListName);
         editTextUserPassword = findViewById(R.id.editTextToDoItemName);
 
@@ -73,16 +72,13 @@ public class Login extends AppCompatActivity {
                 {
                     Toast.makeText(Login.this, "Don't Connect Newtwork", Toast.LENGTH_LONG).show();
                 }
-
                 else {
                         CheckValue();
-
                     if (EditTextControl)
                         UserLogin();
                     else
                         Toast.makeText(Login.this, "Please fill blank.", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -93,6 +89,7 @@ public class Login extends AppCompatActivity {
                 finish();
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
@@ -130,6 +127,7 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(Login.this, Home.class);
                             intent.putExtra("UserEmail", UserEmail);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
                         else {
                             Toast.makeText(Login.this, ServerResponse, Toast.LENGTH_LONG).show();
@@ -153,7 +151,6 @@ public class Login extends AppCompatActivity {
             }
 
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
         requestQueue.add(stringRequest);
     }
@@ -174,15 +171,11 @@ public class Login extends AppCompatActivity {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-
             return true;
-
         } else {
 
             return false;
-
         }
-
     }
 }
 

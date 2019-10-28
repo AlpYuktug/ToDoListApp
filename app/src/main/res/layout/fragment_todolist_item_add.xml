@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="To Do Item DeadLine"
+        android:text="@string/ToDoItemDeadLine"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextToDoItemDesc"
@@ -40,7 +40,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:ems="16"
-        android:hint="To Do Item Name"
+        android:hint="@string/ToDoItemName"
         android:inputType="textEmailAddress"
         android:scrollbarThumbHorizontal="@android:color/background_light"
         android:scrollbarThumbVertical="@android:color/background_light"
@@ -70,15 +70,14 @@
         android:id="@+id/textViewSelectedDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:gravity="center"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewCalendar"
         app:layout_constraintEnd_toEndOf="@+id/textViewDate"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewCalendar"
-        app:layout_constraintTop_toTopOf="@+id/imageViewCalendar"
-        app:layout_constraintVertical_bias="0.685" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewCalendar" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/editTextToDoItemDesc"
@@ -86,7 +85,7 @@
         android:layout_height="62dp"
         android:layout_marginTop="36dp"
         android:ems="16"
-        android:hint="To Do Item Description"
+        android:hint="@string/ToDoItemDescription"
         android:inputType="textEmailAddress"
         android:scrollbarThumbHorizontal="@android:color/background_light"
         android:scrollbarThumbVertical="@android:color/background_light"
@@ -106,12 +105,35 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:text="@string/Done"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewItemAdd"
         app:layout_constraintEnd_toEndOf="@+id/imageViewItemAdd"
         app:layout_constraintStart_toStartOf="@+id/imageViewItemAdd"
         app:layout_constraintTop_toTopOf="@+id/imageViewItemAdd" />
+
+    <ImageView
+        android:id="@+id/imageViewCancel"
+        android:layout_width="0dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewItemAdd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewItemAdd"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewItemAdd"
+        app:srcCompat="@drawable/button" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCancel"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewCancel"
+        app:layout_constraintStart_toStartOf="@+id/imageViewCancel"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCancel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

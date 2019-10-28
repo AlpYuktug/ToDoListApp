@@ -40,7 +40,6 @@ public class VolleyNetworkCall {
         return ToDoListItemUrl;
     }
 
-
     public String getToDoListAddUrl() {
         return ToDoListAddUrl;
     }
@@ -60,7 +59,6 @@ public class VolleyNetworkCall {
     public String getToDoListItemAddExistUrl() {
         return ToDoListItemAddExistUrl;
     }
-
 
     public String getToDoListItemOrderCategoryUrl() {
         return ToDoListItemOrderCategoryUrl;

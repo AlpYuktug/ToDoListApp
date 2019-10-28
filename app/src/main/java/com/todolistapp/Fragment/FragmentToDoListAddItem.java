@@ -1,13 +1,8 @@
 package com.todolistapp.Fragment;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,15 +23,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.todolistapp.Adapter.RecylerViewAdapterToDoListItem;
-import com.todolistapp.Model.ModelToDoListItem;
 import com.todolistapp.NetworkCall.VolleyNetworkCall;
 import com.todolistapp.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -50,7 +40,7 @@ public class FragmentToDoListAddItem extends Fragment {
     String  ToDoListTopic, ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine,ToDoListItemNumberExist;
 
     private EditText editTextToDoItemName,editTextToDoItemDesc;
-    private ImageView imageViewToDoListAdd,imageViewItemAdd,imageViewCalendar;
+    private ImageView imageViewCancel,imageViewItemAdd,imageViewCalendar;
     private TextView textViewSelectedDate;
 
     public RequestQueue mQueue;
@@ -79,7 +69,7 @@ public class FragmentToDoListAddItem extends Fragment {
 
         editTextToDoItemName =  view.findViewById(R.id.editTextToDoItemName);
         editTextToDoItemDesc =  view.findViewById(R.id.editTextToDoItemDesc);
-        imageViewToDoListAdd =  view.findViewById(R.id.imageViewToDoListAdd);
+        imageViewCancel      =  view.findViewById(R.id.imageViewCancel);
         imageViewItemAdd     =  view.findViewById(R.id.imageViewItemAdd);
         imageViewCalendar    =  view.findViewById(R.id.imageViewCalendar);
         textViewSelectedDate =  view.findViewById(R.id.textViewSelectedDate);
@@ -122,8 +112,18 @@ public class FragmentToDoListAddItem extends Fragment {
             }
         });
 
-        return view;
+        imageViewCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new FragmentToDoListItem();
 
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.FragmentContent, fragment)
+                        .commit();
+            }
+        });
+        return view;
     }
 
     private void ToDoListItemAddJSON() {
@@ -173,7 +173,6 @@ public class FragmentToDoListAddItem extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
-
     }
 
     public void CheckValue() {
