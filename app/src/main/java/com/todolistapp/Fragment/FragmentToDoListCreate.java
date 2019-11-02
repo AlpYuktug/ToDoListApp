@@ -77,7 +77,7 @@ public class FragmentToDoListCreate extends Fragment {
                 if(EditTextControl)
                     ToDoListAddJSON();
                 else
-                    Toast.makeText(getContext(),"Please Fill a To-Do List Name",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),String.valueOf(R.string.CheckBlank),Toast.LENGTH_LONG).show();
             }
         });
         imageViewCancel.setOnClickListener(new View.OnClickListener() {

@@ -70,9 +70,9 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
 
-        holder.textViewToDoListItemName.setText("Mission Name:" + ModelToDoListItems.get(position).getToDoListItemTopic());
-        holder.textViewToDoListItemDescription.setText("Mission Description:" + ModelToDoListItems.get(position).getToDoListItemDescription());
-        holder.textViewToDoListItemDeadLine.setText(String.valueOf("Mission Deadline:" + ModelToDoListItems.get(position).getToDoListItemDeadLine()));
+        holder.textViewToDoListItemName.setText(String.valueOf(R.string.ToDoItemName)+ ": " + ModelToDoListItems.get(position).getToDoListItemTopic());
+        holder.textViewToDoListItemDescription.setText(String.valueOf(R.string.ToDoItemDescription)+ ": " + ModelToDoListItems.get(position).getToDoListItemDescription());
+        holder.textViewToDoListItemDeadLine.setText(String.valueOf(String.valueOf(R.string.ToDoItemDeadLine)+ ": " + ModelToDoListItems.get(position).getToDoListItemDeadLine()));
 
         if(String.valueOf(ModelToDoListItems.get(position).getToDoListItemCheck()).equals("0"))
             holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
@@ -84,17 +84,29 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.completedicon);
-                    Toast.makeText(context,"Mission Completed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,String.valueOf(R.string.MissionComplated),Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="1";
                     ChangeCompleted();
+
+                    Fragment fragment = new FragmentToDoListItem();
+                    FragmentManager fm = ((Home) context).getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.add(R.id.FragmentContent, fragment);
+                    ft.commit();
                 }
                 else
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
-                    Toast.makeText(context,"Mission UnCompleted",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,String.valueOf(R.string.MissionFailed),Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="0";
                     ChangeCompleted();
+
+                    Fragment fragment = new FragmentToDoListItem();
+                    FragmentManager fm = ((Home) context).getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.add(R.id.FragmentContent, fragment);
+                    ft.commit();
                 }
             }
         });

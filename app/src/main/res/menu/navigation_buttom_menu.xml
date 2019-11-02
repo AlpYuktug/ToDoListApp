@@ -4,17 +4,17 @@
     <item
         android:id="@+id/ItemAddToDoList"
         android:icon="@drawable/addtodoicon"
-        android:title="Add To-Do" />
+        android:title="@string/AddToDo" />
 
     <item
         android:id="@+id/ItemDisplayToDoList"
         android:icon="@drawable/todolisticon"
-        android:title="List To-Do" />
+        android:title="@string/ListToDo" />
 
     <item
         android:id="@+id/ItemLogout"
         android:icon="@drawable/logouticon"
-        android:title="Log Out" />
+        android:title="@string/LogOut" />
 
 
 </menu>

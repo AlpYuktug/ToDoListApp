@@ -67,16 +67,16 @@ public class Register extends AppCompatActivity {
 
                 if(!CheckNetwork())
                 {
-                    Toast.makeText(Register.this, "Don't Connect Newtwork", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this, String.valueOf(R.string.CheckNetwork), Toast.LENGTH_LONG).show();
                 }
 
                 else {
                     CheckValue();
 
                     if (EditTextControl)
-                        UserLogin();
+                        UserRegister();
                     else
-                        Toast.makeText(Register.this, "Please fill blank.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, String.valueOf(R.string.CheckBlank), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -105,9 +105,9 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    public void UserLogin() {
+    public void UserRegister() {
 
-        progressDialog.setMessage("Register...");
+        progressDialog.setMessage(String.valueOf(R.string.ProgressRegister));
         progressDialog.show();
 
         String LoginURL = UrlAddress.getUserRegisterUrl()+UserEmail;
@@ -121,7 +121,8 @@ public class Register extends AppCompatActivity {
 
                         if(ServerResponse.equalsIgnoreCase("\n\nEmail already taken"))
                         {
-                            Toast.makeText(Register.this, ServerResponse, Toast.LENGTH_LONG).show();
+                            String DisplayError = String.valueOf(R.string.WrongInformation);
+                            Toast.makeText(Register.this, DisplayError, Toast.LENGTH_LONG).show();
                         }
                         else
                         {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#b2fcff</color>
+    <color name="colorPrimaryDark">#1F2D44</color>
+    <color name="colorAccent">#5edfff</color>
+
+    <color name="colotbuttomnavigation">#5edfff</color>
+
+
+</resources>

@@ -61,7 +61,7 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
 
-        holder.textViewToDoListName.setText("To-Do List Name:" +ModelToDoLists.get(position).getToDoListTopic());
+        holder.textViewToDoListName.setText(String.valueOf(R.string.ToDoName) +": "+ModelToDoLists.get(position).getToDoListTopic());
 
         holder.textViewToDoListName.setOnClickListener(new View.OnClickListener() {
             @Override

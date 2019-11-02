@@ -6,7 +6,35 @@
     <string name="ToDoItemDescription">To Do Item Description</string>
     <string name="Done">Done</string>
     <string name="Cancel">Cancel</string>
+    <string name="Choose">Choose</string>
+    <string name="Export">Export</string>
+    <string name="AddNewMission">Add New Mission</string>
+
+    <string name="AddToDo">Add To-Do</string>
+    <string name="ListToDo">List To-Do</string>
+    <string name="LogOut">Log Out</string>
+
+    <string name="SignUpButton">Sign Up</string>
+    <string name="SignInButton">Sign In</string>
     <string name="SignUp">Dont Have An Account? Sign Up Here!</string>
     <string name="SignIn">Have An Account? Sign In Here!</string>
+
+    <string name="UserName">UserName</string>
+    <string name="Password">Password</string>
+
+    <string name="WrongInformation">Check Your Information</string>
+    <string name="DontHavaAccount">This E-Mail Dont Registered</string>
+    <string name="SuccesRegistered">You registered successful</string>
+
+    <string name="MissionComplated">Mission is Succesfull</string>
+    <string name="MissionFailed">Mission is Failed</string>
+
+    <string name="ProgressLogin">Login...</string>
+    <string name="ProgressRegister">Register...</string>
+
+
+    <string name="CheckNetwork">Dont Connect Newtwork</string>
+    <string name="CheckBlank">Please fill blank</string>
+
 
 </resources>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ToDoListApp</string>
+    <string name="ToDoName">Yapılacak Liste Adı</string>
+    <string name="ToDoItemDeadLine">Görev Bitiş Tarihi</string>
+    <string name="ToDoItemName">Görev Adı</string>
+    <string name="ToDoItemDescription">Görev Açıklaması</string>
+    <string name="Done">Tamam</string>
+    <string name="Cancel">İptal Et</string>
+    <string name="Choose">Seç</string>
+    <string name="Export">Dışarı Aktar</string>
+    <string name="AddNewMission">Yeni Görev Ekle</string>
+
+    <string name="AddToDo">Yapılacak Listesi Ekle</string>
+    <string name="ListToDo">Yapılacaklar Listesi</string>
+    <string name="LogOut">Çıkış</string>
+
+    <string name="SignUpButton">Kayıt Ol</string>
+    <string name="SignInButton">Giriş Yap</string>
+    <string name="SignUp">Kayıtlı Bir Hesabınız Yok Mu? Buradan Kayıt Yapabilirsiniz!</string>
+    <string name="SignIn">Kayıtlı Bir Hesabınız Mı Var? Buradan Giriş Yapabilirsiniz!</string>
+
+    <string name="UserName">Kullanıcı Adı</string>
+    <string name="Password">Şifre</string>
+
+    <string name="WrongInformation">Giriş Bilgilerinizi Kontrol Ediniz.</string>
+    <string name="DontHavaAccount">Kayıtlı Olmayan Kullanıcı Denemesi</string>
+    <string name="SuccesRegistered">Kayıt İşleminiz Başarılı Şekilde Gerçekleşti</string>
+
+    <string name="MissionComplated">Görev Başarılı</string>
+    <string name="MissionFailed">Görev Başarısız</string>
+
+    <string name="ProgressLogin">Giriş Yapılıyor...</string>
+    <string name="ProgressRegister">Kayıt Yapılıyor...</string>
+
+
+    <string name="CheckNetwork">İnternet Bağlantınız Yok</string>
+    <string name="CheckBlank">Lütfen Boş Alan Bırakmayınız</string>
+</resources>

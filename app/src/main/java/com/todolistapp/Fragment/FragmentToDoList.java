@@ -48,7 +48,6 @@ public class FragmentToDoList extends Fragment {
     private RequestQueue mQueue;
 
     private List<ModelToDoList> ModelToDoLists;
-    private List<ModelToDoList> ModelToDoListsDefault;
 
     private RecyclerView RecylerViewToDoList;
     private RecylerViewAdapterToDoList ToDoListAdapter;
