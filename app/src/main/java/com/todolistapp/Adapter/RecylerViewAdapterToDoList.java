@@ -42,6 +42,8 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
 
     public Map<String, String> paramsdelete;
 
+
+
     public RecylerViewAdapterToDoList(List<ModelToDoList> ModelToDoLists,Context context) {
         this.ModelToDoLists = ModelToDoLists;
         this.context = context;
@@ -61,7 +63,7 @@ public class RecylerViewAdapterToDoList extends RecyclerView.Adapter<RecylerView
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
 
-        holder.textViewToDoListName.setText(String.valueOf(R.string.ToDoName) +": "+ModelToDoLists.get(position).getToDoListTopic());
+        holder.textViewToDoListName.setText(context.getResources().getString(R.string.ToDoName) +": "+ModelToDoLists.get(position).getToDoListTopic());
 
         holder.textViewToDoListName.setOnClickListener(new View.OnClickListener() {
             @Override

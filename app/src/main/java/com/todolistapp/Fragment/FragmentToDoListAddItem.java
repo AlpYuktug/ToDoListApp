@@ -94,8 +94,8 @@ public class FragmentToDoListAddItem extends Fragment {
                             }
                         }, year, month, day);
 
-                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, String.valueOf(R.string.Choose), dpd);
-                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, String.valueOf(R.string.Cancel), dpd);
+                dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.Choose), dpd);
+                dpd.setButton(DatePickerDialog.BUTTON_NEGATIVE, getString(R.string.Cancel), dpd);
                 dpd.show();
 
             }
@@ -108,7 +108,7 @@ public class FragmentToDoListAddItem extends Fragment {
                 if(EditTextControl)
                 ToDoListItemAddJSON();
                 else
-                    Toast.makeText(getContext(),String.valueOf(R.string.CheckBlank),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),getString(R.string.CheckBlank),Toast.LENGTH_LONG).show();
             }
         });
 

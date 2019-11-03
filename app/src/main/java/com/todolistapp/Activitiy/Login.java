@@ -70,14 +70,14 @@ public class Login extends AppCompatActivity {
 
                 if(!CheckNetwork())
                 {
-                    Toast.makeText(Login.this, String.valueOf(R.string.CheckNetwork), Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this, getString(R.string.CheckNetwork), Toast.LENGTH_LONG).show();
                 }
                 else {
                         CheckValue();
                     if (EditTextControl)
                         UserLogin();
                     else
-                        Toast.makeText(Login.this, String.valueOf(R.string.CheckBlank), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, getString(R.string.CheckBlank), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -108,7 +108,7 @@ public class Login extends AppCompatActivity {
 
     public void UserLogin() {
 
-        progressDialog.setMessage(String.valueOf(R.string.ProgressLogin));
+        progressDialog.setMessage(getString(R.string.ProgressLogin));
         progressDialog.show();
 
         String LoginURL = UrlAddress.getUserLoginUrl();
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
                         else {
-                            String DisplayError = String.valueOf(R.string.WrongInformation);
+                            String DisplayError = getString(R.string.WrongInformation);
                             Toast.makeText(Login.this, DisplayError, Toast.LENGTH_LONG).show();
                         }
                     }

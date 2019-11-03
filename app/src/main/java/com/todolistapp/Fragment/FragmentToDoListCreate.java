@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.itextpdf.text.factories.GreekAlphabetFactory.getString;
 
 public class FragmentToDoListCreate extends Fragment {
 
@@ -77,7 +78,7 @@ public class FragmentToDoListCreate extends Fragment {
                 if(EditTextControl)
                     ToDoListAddJSON();
                 else
-                    Toast.makeText(getContext(),String.valueOf(R.string.CheckBlank),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),getString(R.string.CheckBlank),Toast.LENGTH_LONG).show();
             }
         });
         imageViewCancel.setOnClickListener(new View.OnClickListener() {

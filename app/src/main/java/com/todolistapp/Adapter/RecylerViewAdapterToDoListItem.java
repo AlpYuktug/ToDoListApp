@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<RecylerViewAdapterToDoListItem.ToDoListItemViewHolder>
         implements Filterable
     {
@@ -70,9 +69,9 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
         UrlAddress = new VolleyNetworkCall();
         mQueue = Volley.newRequestQueue(context);
 
-        holder.textViewToDoListItemName.setText(String.valueOf(R.string.ToDoItemName)+ ": " + ModelToDoListItems.get(position).getToDoListItemTopic());
-        holder.textViewToDoListItemDescription.setText(String.valueOf(R.string.ToDoItemDescription)+ ": " + ModelToDoListItems.get(position).getToDoListItemDescription());
-        holder.textViewToDoListItemDeadLine.setText(String.valueOf(String.valueOf(R.string.ToDoItemDeadLine)+ ": " + ModelToDoListItems.get(position).getToDoListItemDeadLine()));
+        holder.textViewToDoListItemName.setText(context.getResources().getString(R.string.ToDoItemName)+ ": " + ModelToDoListItems.get(position).getToDoListItemTopic());
+        holder.textViewToDoListItemDescription.setText(context.getResources().getString(R.string.ToDoItemDescription)+ ": " + ModelToDoListItems.get(position).getToDoListItemDescription());
+        holder.textViewToDoListItemDeadLine.setText(context.getResources().getString(R.string.ToDoItemDeadLine)+ ": " + ModelToDoListItems.get(position).getToDoListItemDeadLine());
 
         if(String.valueOf(ModelToDoListItems.get(position).getToDoListItemCheck()).equals("0"))
             holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
@@ -84,7 +83,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.completedicon);
-                    Toast.makeText(context,String.valueOf(R.string.MissionComplated),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,context.getResources().getString(R.string.MissionComplated),Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="1";
                     ChangeCompleted();
 
@@ -98,7 +97,7 @@ public class RecylerViewAdapterToDoListItem extends RecyclerView.Adapter<Recyler
                 {
                     Position=position;
                     holder.imageViewCompleted.setImageResource(R.drawable.notcompletedicon);
-                    Toast.makeText(context,String.valueOf(R.string.MissionFailed),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,context.getResources().getString(R.string.MissionFailed),Toast.LENGTH_LONG).show();
                     ToDoListItemCheck="0";
                     ChangeCompleted();
 
