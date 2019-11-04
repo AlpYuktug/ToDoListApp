@@ -398,9 +398,9 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         for (int i = 0; i<listSize; i++){
 
             String MissionDetails = "\n" +"Mission Number: " + ModelToDoListItems.get(i).ToDoListItemNumber + "\n" +
-                    "Mission Name: "+ ModelToDoListItems.get(i).ToDoListItemTopic+ "\n" +
-                    "Mission Description: "+ ModelToDoListItems.get(i).ToDoListItemDescription + "\n" +
-                    "Mission Deadline: "+ ModelToDoListItems.get(i).getToDoListItemDeadLine();
+                    getString(R.string.ToDoItemName) + ModelToDoListItems.get(i).ToDoListItemTopic+ "\n" +
+                    getString(R.string.ToDoItemDescription) + ModelToDoListItems.get(i).ToDoListItemDescription + "\n" +
+                    getString(R.string.ToDoItemDeadLine) + ModelToDoListItems.get(i).getToDoListItemDeadLine();
 
             document.add(new Paragraph(MissionDetails));
         }
