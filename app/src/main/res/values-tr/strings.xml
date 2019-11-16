@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDoListApp</string>
+    <string name="app_name">Yapılacaklar</string>
     <string name="ToDoName">Yapılacak Liste Adı</string>
     <string name="MissionsList">Görev Listesi</string>
     <string name="ToDoItemDeadLine">Görev Bitis Tarihi</string>
