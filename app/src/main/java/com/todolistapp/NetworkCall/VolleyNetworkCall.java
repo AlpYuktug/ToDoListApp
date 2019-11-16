@@ -6,6 +6,7 @@ public class VolleyNetworkCall {
 
     public String UserLoginUrl = BaseURL+ "user/userlogin";
     public String UserRegisterUrl = BaseURL+ "user/userregister?UserMail=";
+    public String UserDelete = BaseURL+ "user/userdelete?UserMail=";
 
     public String ToDoListUrl = BaseURL+ "todo/todolist";
     public String ToDoListItemUrl = BaseURL+ "todo/todolistitem";
@@ -16,8 +17,6 @@ public class VolleyNetworkCall {
     public String ToDoListDeletedUrl = BaseURL+ "todo/deletetodolist";
 
     public String ToDoListItemAddExistUrl = BaseURL+ "todo/addtooitemexist";
-
-    public String ToDoListItemOrderCategoryUrl = BaseURL+ "todo/ordercategory";
 
 
     public String getBaseURL() {
@@ -31,6 +30,11 @@ public class VolleyNetworkCall {
     public String getUserRegisterUrl() {
         return UserRegisterUrl;
     }
+
+    public String getUserDelete() {
+        return UserDelete;
+    }
+
 
     public String getToDoListUrl() {
         return ToDoListUrl;
@@ -60,9 +64,6 @@ public class VolleyNetworkCall {
         return ToDoListItemAddExistUrl;
     }
 
-    public String getToDoListItemOrderCategoryUrl() {
-        return ToDoListItemOrderCategoryUrl;
-    }
 
 }
 

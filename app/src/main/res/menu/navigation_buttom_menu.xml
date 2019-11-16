@@ -12,9 +12,8 @@
         android:title="@string/ListToDo" />
 
     <item
-        android:id="@+id/ItemLogout"
+        android:id="@+id/ItemProfile"
         android:icon="@drawable/logouticon"
-        android:title="@string/LogOut" />
-
+        android:title="@string/Profile" />
 
 </menu>

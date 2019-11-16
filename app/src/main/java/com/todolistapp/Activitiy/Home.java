@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.todolistapp.Fragment.FragmentProfile;
 import com.todolistapp.Fragment.FragmentToDoList;
 import com.todolistapp.Fragment.FragmentToDoListCreate;
 import com.todolistapp.R;
@@ -58,10 +59,10 @@ public class Home extends AppCompatActivity {
                     GetFragment(fragmentAddToDoList);
                     return true;
 
-                case R.id.ItemLogout:
-                    finish();
-                    Intent intent = new Intent(Home.this, Login.class);
-                    startActivity(intent);
+                case R.id.ItemProfile:
+                    Fragment fragmentProfile = new FragmentProfile();
+                    GetFragment(fragmentProfile);
+                    return true;
                 }
 
             return false;

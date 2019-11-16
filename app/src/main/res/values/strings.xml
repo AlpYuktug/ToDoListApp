@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">To-Do List</string>
     <string name="ToDoName">To Do Name</string>
+
+    <string name="Profile">Profile</string>
+    <string name="ChangePassword">Change Password</string>
+    <string name="DeleteAccount">Delete Account</string>
+    <string name="DeleteSure">Are You Sure?</string>
+    <string name="DeleteSureDesc">If You Click Done Button, Your Account Delete</string>
+
+
     <string name="MissionsList">Missions List</string>
     <string name="ToDoItemDeadLine">To Do Item DeadLine</string>
     <string name="ToDoItemName">To Do Item Name</string>

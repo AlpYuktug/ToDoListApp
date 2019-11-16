@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Yapılacaklar</string>
+    <string name="Profile">Profil</string>
     <string name="ToDoName">Yapılacak Liste Adı</string>
+
+    <string name="ChangePassword">Şifre Değiştir</string>
+    <string name="DeleteAccount">Hesabı Sil</string>
+    <string name="DeleteSure">Emin Misiniz?</string>
+    <string name="DeleteSureDesc">Eğer Onaylarsanız, Hesabınız Silinecektir.</string>
+
     <string name="MissionsList">Görev Listesi</string>
     <string name="ToDoItemDeadLine">Görev Bitis Tarihi</string>
     <string name="ToDoItemName">Görev Adı</string>
