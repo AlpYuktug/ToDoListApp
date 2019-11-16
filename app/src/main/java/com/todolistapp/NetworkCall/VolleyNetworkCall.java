@@ -34,7 +34,6 @@ public class VolleyNetworkCall {
         return UserDelete;
     }
 
-
     public String getToDoListUrl() {
         return ToDoListUrl;
     }
