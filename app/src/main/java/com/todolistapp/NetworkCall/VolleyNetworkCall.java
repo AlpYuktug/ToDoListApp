@@ -18,7 +18,6 @@ public class VolleyNetworkCall {
 
     public String ToDoListItemAddExistUrl = BaseURL+ "todo/addtooitemexist";
 
-
     public String getBaseURL() {
         return BaseURL;
     }
