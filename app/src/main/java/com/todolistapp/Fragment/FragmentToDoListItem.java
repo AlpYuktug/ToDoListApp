@@ -45,6 +45,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -61,6 +65,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -95,6 +100,8 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
     private List<String> OrderList = new ArrayList<String>();
 
     private File pdfFile;
+    public Image ImageTitle;
+
     final private int REQUEST_CODE_ASK_PERMISSIONS = 111;
 
     @Override
@@ -189,7 +196,7 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                                 {
                                     ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
 
-                                    if(OrderCategoryName.equals("All"))
+                                    if(OrderCategoryName.equals(getString(R.string.All)))
                                     {
                                         ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
                                         ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
@@ -200,7 +207,7 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                                         ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
                                     }
 
-                                    else if(OrderCategoryName.equals("Completed"))
+                                    else if(OrderCategoryName.equals(getString(R.string.Complated)))
                                     {
                                         if (ToDoListItemCheck == 1)
                                         {
@@ -215,7 +222,7 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
 
                                     }
 
-                                    else if(OrderCategoryName.equals("UnCompleted"))
+                                    else if(OrderCategoryName.equals(getString(R.string.UnComplated)))
                                     {
                                         if (ToDoListItemCheck == 0)
                                         {
@@ -228,18 +235,6 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
                                         ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
                                         }
                                     }
-
-                                    else
-                                    {
-                                        ToDoListItemTopic = todoitem.getString("ToDoListItemTopic");
-                                        ToDoListItemNumber = todoitem.getInt("ToDoListItemNumber");
-                                        ToDoListItemCheck = todoitem.getInt("ToDoListItemCheck");
-                                        ToDoListItemDescription = todoitem.getString("ToDoListItemDescription");
-                                        ToDoListItemDeadLine = todoitem.getString("ToDoListItemDeadLine");
-
-                                        ModelToDoListItems.add(new ModelToDoListItem(ToDoListNumber,ToDoListItemNumber,ToDoListItemCheck,ToDoListItemTopic,ToDoListItemDescription,ToDoListItemDeadLine));
-                                    }
-
                                 }
                             }
 
@@ -283,41 +278,17 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         }
 
     private void GetOrderList() {
-
         OrderList.clear();
 
-        String OrderListUrl = UrlAddress.getToDoListItemOrderCategoryUrl();
+        OrderList.add(getString(R.string.All));
+        OrderList.add(getString(R.string.Complated));
+        OrderList.add(getString(R.string.UnComplated));
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, OrderListUrl, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("OrderCategory");
+        ArrayAdapter<String> OrderCategoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_model, OrderList);
+        OrderCategoryAdapter.setDropDownViewResource(R.layout.spinner_model);
 
-                            OrderList.add("Choose Order Filter");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject category = jsonArray.getJSONObject(i);
-                                OrderCategoryName = category.getString("OrderCategoryName");
-                                OrderList.add(OrderCategoryName);
-                            }
+        spinnerOrderList.setAdapter(OrderCategoryAdapter);
 
-                            ArrayAdapter<String> OrderCategoryAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_model, OrderList);
-                            OrderCategoryAdapter.setDropDownViewResource(R.layout.spinner_model);
-
-                            spinnerOrderList.setAdapter(OrderCategoryAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mQueue.add(request);
     }
 
     private void createPdfWrapper() throws FileNotFoundException, DocumentException {
@@ -393,23 +364,51 @@ public class FragmentToDoListItem extends Fragment implements AdapterView.OnItem
         PdfWriter.getInstance(document, output);
         document.open();
 
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD,26);
+        Font itemFont = FontFactory.getFont(FontFactory.HELVETICA,18);
+
+        try {
+             ImageTitle = Image.getInstance(String.valueOf(R.drawable.calendaricon));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Paragraph ITitle = new Paragraph();
+        ITitle.setAlignment(Element.ALIGN_CENTER);
+        ITitle.add(ImageTitle);
+        document.add(ITitle);
+
+        Paragraph Title = new Paragraph();
+        Title.setFont(titleFont);
+        Title.setAlignment(Element.ALIGN_CENTER);
+        Title.add(getString(R.string.MissionsList));
+        document.add(Title);
+
+        Paragraph LineTitle = new Paragraph();
+        LineTitle.add("-------------------------------------------------------------------------------------------------------------------------------");
+        document.add(LineTitle);
+
         int listSize = ModelToDoListItems.size();
 
         for (int i = 0; i<listSize; i++){
 
-            String MissionDetails = "\n" +"Mission Number: " + ModelToDoListItems.get(i).ToDoListItemNumber + "\n" +
-                    getString(R.string.ToDoItemName) + ModelToDoListItems.get(i).ToDoListItemTopic+ "\n" +
-                    getString(R.string.ToDoItemDescription) + ModelToDoListItems.get(i).ToDoListItemDescription + "\n" +
-                    getString(R.string.ToDoItemDeadLine) + ModelToDoListItems.get(i).getToDoListItemDeadLine();
+            String MissionDetails = "\n" + getString(R.string.ToDoItemNumber) + " : " + ModelToDoListItems.get(i).ToDoListItemNumber + "\n" +
+                    getString(R.string.ToDoItemName) + " : " +ModelToDoListItems.get(i).ToDoListItemTopic+ "\n" +
+                    getString(R.string.ToDoItemDescription) + " : " +ModelToDoListItems.get(i).ToDoListItemDescription + "\n" +
+                    getString(R.string.ToDoItemDeadLine) + " : " +ModelToDoListItems.get(i).getToDoListItemDeadLine();
 
-            document.add(new Paragraph(MissionDetails));
+            Paragraph Item = new Paragraph();
+            Item.setFont(itemFont);
+            Item.add(MissionDetails);
+            document.add(Item);
+
+            Paragraph Line = new Paragraph();
+            Line.add("-------------------------------------------------------------------------------");
+            document.add(Line);
         }
-
-
         document.close();
         Intent OpenPDF = new Intent(getContext(), com.todolistapp.Activitiy.OpenPDF.class);
         startActivity(OpenPDF);
-
     }
 
     @Override

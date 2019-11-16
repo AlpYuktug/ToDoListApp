@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">ToDoListApp</string>
     <string name="ToDoName">Yapılacak Liste Adı</string>
-    <string name="ToDoItemDeadLine">Görev Bitiş Tarihi</string>
+    <string name="MissionsList">Görev Listesi</string>
+    <string name="ToDoItemDeadLine">Görev Bitis Tarihi</string>
     <string name="ToDoItemName">Görev Adı</string>
-    <string name="ToDoItemDescription">Görev Açıklaması</string>
+    <string name="ToDoItemDescription">Görev Açiklama</string>
+    <string name="ToDoItemNumber">Görev Numarasi</string>
+
     <string name="Done">Tamam</string>
     <string name="Cancel">İptal Et</string>
     <string name="Choose">Seç</string>
     <string name="Export">Dışarı Aktar</string>
+    <string name="Share">Paylas</string>
     <string name="AddNewMission">Yeni Görev Ekle</string>
 
     <string name="AddToDo">Yapılacak Listesi Ekle</string>
@@ -28,6 +32,11 @@
 
     <string name="MissionComplated">Görev Başarılı</string>
     <string name="MissionFailed">Görev Başarısız</string>
+
+
+    <string name="All">Tümü</string>
+    <string name="Complated">Tamamlananlar</string>
+    <string name="UnComplated">Tamamlanmayanlar</string>
 
     <string name="ProgressLogin">Giriş Yapılıyor...</string>
     <string name="ProgressRegister">Kayıt Yapılıyor...</string>
