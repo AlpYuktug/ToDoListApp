@@ -103,6 +103,11 @@ public class FragmentProfile extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         AccountDelete();
+
+                        Toast.makeText(getContext(),getString(R.string.DeleteCompleted),Toast.LENGTH_LONG).show();
+                        getActivity().finish();
+                        Intent intent = new Intent(getContext(),Login.class);
+                        startActivity(intent);
                     }
                 });
                 builder.show();

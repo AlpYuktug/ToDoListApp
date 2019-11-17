@@ -127,7 +127,7 @@ public class Register extends AppCompatActivity {
                         else
                         {
                             finish();
-                            Toast.makeText(Register.this, ServerResponse, Toast.LENGTH_LONG).show();
+                            Toast.makeText(Register.this, getString(R.string.CreateAccount), Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

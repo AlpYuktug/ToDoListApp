@@ -3,10 +3,14 @@
     <string name="Profile">Profil</string>
     <string name="ToDoName">Yapılacak Liste Adı</string>
 
+    <string name="CreateAccount">Başarılı Şekilde Kayıt Oldunuz. Kayıtlı Hesabınız İle Giriş Yapabilirsiniz.</string>
+
+
     <string name="ChangePassword">Şifre Değiştir</string>
     <string name="DeleteAccount">Hesabı Sil</string>
     <string name="DeleteSure">Emin Misiniz?</string>
     <string name="DeleteSureDesc">Eğer Onaylarsanız, Hesabınız Silinecektir.</string>
+    <string name="DeleteCompleted">Hesabınız Başarılı Bir Şekilde Silindi.</string>
 
     <string name="MissionsList">Görev Listesi</string>
     <string name="ToDoItemDeadLine">Görev Bitis Tarihi</string>
@@ -33,8 +37,9 @@
     <string name="UserName">Kullanıcı Adı</string>
     <string name="Password">Şifre</string>
 
+    <string name="SameInformation">Kayıtlı E-Posta Kullanamazsınız</string>
     <string name="WrongInformation">Giriş Bilgilerinizi Kontrol Ediniz.</string>
-    <string name="DontHavaAccount">Kayıtlı Olmayan Kullanıcı Denemesi</string>
+    <string name="DontHavaAccount">Kayıtlı Olmayan E-Posta Denemesi</string>
     <string name="SuccesRegistered">Kayıt İşleminiz Başarılı Şekilde Gerçekleşti</string>
 
     <string name="MissionComplated">Görev Başarılı</string>

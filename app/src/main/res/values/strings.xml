@@ -2,11 +2,14 @@
     <string name="app_name">To-Do List</string>
     <string name="ToDoName">To Do Name</string>
 
+    <string name="CreateAccount">You Have Successfully Registered! Now, You Can Sign In.</string>
+
     <string name="Profile">Profile</string>
     <string name="ChangePassword">Change Password</string>
     <string name="DeleteAccount">Delete Account</string>
     <string name="DeleteSure">Are You Sure?</string>
     <string name="DeleteSureDesc">If You Click Done Button, Your Account Delete</string>
+    <string name="DeleteCompleted">Your Account Delete Successfully</string>
 
 
     <string name="MissionsList">Missions List</string>
@@ -34,6 +37,7 @@
     <string name="UserName">UserName</string>
     <string name="Password">Password</string>
 
+    <string name="SameInformation">Email Already Taken</string>
     <string name="WrongInformation">Check Your Information</string>
     <string name="DontHavaAccount">This E-Mail Dont Registered</string>
     <string name="SuccesRegistered">You registered successful</string>
