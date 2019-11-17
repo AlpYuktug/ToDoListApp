@@ -10,6 +10,7 @@ import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,14 +55,13 @@ public class FragmentProfile extends Fragment {
 
     private RequestQueue mQueue;
 
-    private List<ModelToDoList> ModelToDoLists;
-
     private VolleyNetworkCall UrlAddress;
 
     private SharedPreferences UserInformationSP;
     private String UserEmail;
 
     public TextView textViewEMail,textViewChangePassword,textViewDeleteAccount;
+    public ImageView imageViewLogOut;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +78,6 @@ public class FragmentProfile extends Fragment {
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        ModelToDoLists = new ArrayList<>();
-
         UrlAddress = new VolleyNetworkCall();
 
         mQueue = Volley.newRequestQueue(getActivity());
@@ -91,6 +89,19 @@ public class FragmentProfile extends Fragment {
         textViewEMail.setText(UserEmail);
 
         textViewChangePassword = view.findViewById(R.id.textViewChangePassword);
+        textViewChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new FragmentProfileChangePassword();
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.FragmentContent, fragment)
+                        .commit();
+            }
+        });
+
+
         textViewDeleteAccount = view.findViewById(R.id.textViewDeleteAccount);
         textViewDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +122,16 @@ public class FragmentProfile extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        imageViewLogOut = view.findViewById(R.id.imageViewLogOut);
+        imageViewLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+                Intent intent = new Intent(getContext(),Login.class);
+                startActivity(intent);
             }
         });
 

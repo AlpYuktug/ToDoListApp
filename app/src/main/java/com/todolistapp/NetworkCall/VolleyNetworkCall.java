@@ -7,6 +7,8 @@ public class VolleyNetworkCall {
     public String UserLoginUrl = BaseURL+ "user/userlogin";
     public String UserRegisterUrl = BaseURL+ "user/userregister?UserMail=";
     public String UserDelete = BaseURL+ "user/userdelete?UserMail=";
+    public String UserGetInformation = BaseURL+ "user/userjsongetmail?UserMail=";
+    public String UserChangePassword = BaseURL+ "user/userchangepassword?UserMail=";
 
     public String ToDoListUrl = BaseURL+ "todo/todolist";
     public String ToDoListItemUrl = BaseURL+ "todo/todolistitem";
@@ -33,6 +35,15 @@ public class VolleyNetworkCall {
     public String getUserDelete() {
         return UserDelete;
     }
+
+    public String getUserGetInformation() {
+        return UserGetInformation;
+    }
+
+    public String getUserChangePassword() {
+        return UserChangePassword;
+    }
+
 
     public String getToDoListUrl() {
         return ToDoListUrl;

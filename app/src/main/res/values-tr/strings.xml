@@ -29,6 +29,14 @@
     <string name="ListToDo">Yapılacaklar Listesi</string>
     <string name="LogOut">Çıkış</string>
 
+    <string name="CurrentPassword">Şifreniz*</string>
+    <string name="NewPassword">Yeni Şifreniz*</string>
+    <string name="NewPasswordAgain">Tekrar Yeni Şifreniz*</string>
+
+    <string name="WrongPassword">Girmiş Olduğunuz Mevcut Şifreniz Hatalı</string>
+    <string name="DontMatchPassword">Girmiş Olduğunuz Şifreler Birbiriyle Eşleşmiyor</string>
+    <string name="MustBlank"> * işaretli alanların doldurulması zorunludur</string>
+
     <string name="SignUpButton">Kayıt Ol</string>
     <string name="SignInButton">Giriş Yap</string>
     <string name="SignUp">Kayıtlı Bir Hesabınız Yok Mu? Buradan Kayıt Yapabilirsiniz!</string>

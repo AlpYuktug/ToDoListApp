@@ -29,6 +29,15 @@
     <string name="ListToDo">List To-Do</string>
     <string name="LogOut">Log Out</string>
 
+    <string name="CurrentPassword">Current Password*</string>
+    <string name="NewPassword">New Password*</string>
+    <string name="NewPasswordAgain">Confirm New Password*</string>
+
+    <string name="WrongPassword">Your Current Password Is Incorrect</string>
+    <string name="DontMatchPassword">The Passwords You Entered Dont Match Each Other</string>
+    <string name="MustBlank"> * The Marked Fields Must Be Filled In</string>
+
+
     <string name="SignUpButton">Sign Up</string>
     <string name="SignInButton">Sign In</string>
     <string name="SignUp">Dont Have An Account? Sign Up Here!</string>
